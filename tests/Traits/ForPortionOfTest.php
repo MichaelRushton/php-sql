@@ -1,0 +1,17 @@
+<?php
+
+declare(strict_types=1);
+
+use MichaelRushton\SQL\SQL;
+
+test("for portion of", function ($start, $end)
+{
+
+  expect((string) SQL::MariaDB->table("t1")->forPortionOf("date_period", $start, $end))
+  ->toBe("`t1` FOR PORTION OF `date_period` FROM '2024-01-01 00:00:00' TO '2025-01-01 00:00:00'");
+
+})
+->with([
+  ["2024-01-01 00:00:00", "2025-01-01 00:00:00"],
+  [new DateTime("2024-01-01 00:00:00"), new DateTime("2025-01-01 00:00:00")],
+]);
