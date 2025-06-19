@@ -1,0 +1,47 @@
+<?php
+
+declare(strict_types=1);
+
+namespace MichaelRushton\SQL\Traits;
+
+use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use Stringable;
+
+trait RowsExamined
+{
+
+  protected int|string|Stringable $rows_examined = "";
+
+  use RowCount;
+
+  public function rowsExamined(int|string|Stringable $row_count): static
+  {
+
+    $this->rows_examined = $row_count;
+
+    return $this;
+
+  }
+
+  protected function getRowsExamined(): string
+  {
+
+    if ("" === $this->rows_examined)
+    {
+      return "";
+    }
+
+    $rows_examined = "ROWS EXAMINED $this->rows_examined";
+
+    if ($this->rows_examined instanceof HasBindings)
+    {
+      $this->mergeBindings($this->rows_examined);
+    }
+
+    $prefix = "" === $this->row_count ? "LIMIT " : "";
+
+    return "$prefix$rows_examined";
+
+  }
+
+}

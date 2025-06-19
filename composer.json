@@ -1,0 +1,21 @@
+{
+    "name": "michaelrushton/sql",
+    "description": "A library to generate SQL statement strings using a fluent interface.",
+    "license": "MIT",
+    "require": {
+        "php": "^8.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "MichaelRushton\\SQL\\": "src/"
+        }
+    },
+    "require-dev": {
+        "pestphp/pest": "^3.7"
+    },
+    "config": {
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    }
+}
