@@ -9,10 +9,9 @@ use MichaelRushton\SQL\Contracts\Components\SubqueryInterface;
 
 trait ToSubquery
 {
-
-  public function toSubquery(): SubqueryInterface
-  {
-    return new Subquery($this);
-  }
+    public function toSubquery(): SubqueryInterface
+    {
+        return new Subquery($this);
+    }
 
 }

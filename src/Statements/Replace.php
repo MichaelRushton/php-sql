@@ -19,63 +19,61 @@ use MichaelRushton\SQL\Traits\With;
 
 class Replace extends Statement implements ReplaceInterface
 {
+    use Columns;
+    use Delayed;
+    use Into;
+    use LowPriority;
+    use Returning;
+    use Select;
+    use Set;
+    use Values;
+    use With;
 
-  use Columns;
-  use Delayed;
-  use Into;
-  use LowPriority;
-  use Returning;
-  use Select;
-  use Set;
-  use Values;
-  use With;
-
-  protected function toArray(): array
-  {
-
-    return match ($this->sql())
+    protected function toArray(): array
     {
 
-      SQL::MariaDB => [
-        "INSERT",
-        $this->low_priority,
-        $this->delayed,
-        $this->into,
-        $this->getColumns(),
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSet(),
-          $this->getSelect(),
-        ], "strlen")) ?: "VALUES ()",
-        $this->getReturning(),
-      ],
+        return match ($this->sql()) {
 
-      SQL::MySQL => [
-        "INSERT",
-        $this->low_priority,
-        $this->into,
-        $this->getColumns(),
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSet(),
-          $this->getSelect(),
-        ], "strlen")) ?: "VALUES ()",
-      ],
+            SQL::MariaDB => [
+              "INSERT",
+              $this->low_priority,
+              $this->delayed,
+              $this->into,
+              $this->getColumns(),
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSet(),
+                $this->getSelect(),
+              ], "strlen")) ?: "VALUES ()",
+              $this->getReturning(),
+            ],
 
-      SQL::SQLite => [
-        $this->getWith(),
-        "INSERT",
-        $this->into,
-        $this->getColumns(),
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSelect(),
-        ], "strlen")) ?: "DEFAULT VALUES",
-        $this->getReturning(),
-      ],
+            SQL::MySQL => [
+              "INSERT",
+              $this->low_priority,
+              $this->into,
+              $this->getColumns(),
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSet(),
+                $this->getSelect(),
+              ], "strlen")) ?: "VALUES ()",
+            ],
 
-    };
+            SQL::SQLite => [
+              $this->getWith(),
+              "INSERT",
+              $this->into,
+              $this->getColumns(),
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSelect(),
+              ], "strlen")) ?: "DEFAULT VALUES",
+              $this->getReturning(),
+            ],
 
-  }
+        };
+
+    }
 
 }

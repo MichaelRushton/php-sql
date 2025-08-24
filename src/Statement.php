@@ -13,28 +13,28 @@ use Stringable;
 
 abstract class Statement implements StatementInterface, HasBindings, Stringable
 {
+    use Bindings;
+    use When;
 
-  use Bindings;
-  use When;
+    public function __construct(
+        protected SQLInterface $sql
+    ) {
+    }
 
-  public function __construct(
-    protected SQLInterface $sql
-  ) {}
+    public function sql(): SQLInterface
+    {
+        return $this->sql;
+    }
 
-  public function sql(): SQLInterface
-  {
-    return $this->sql;
-  }
+    abstract protected function toArray(): array;
 
-  abstract protected function toArray(): array;
+    public function __toString(): string
+    {
 
-  public function __toString(): string
-  {
+        $this->bindings = [];
 
-    $this->bindings = [];
+        return implode(" ", array_filter($this->toArray(), "strlen"));
 
-    return implode(" ", array_filter($this->toArray(), "strlen"));
-
-  }
+    }
 
 }

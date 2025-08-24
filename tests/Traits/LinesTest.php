@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 use MichaelRushton\SQL\Components\Outfile;
 
-test("lines starting by", function ($string, $output)
-{
+test("lines starting by", function ($string, $output) {
 
-  expect((string) (new Outfile("path"))->linesStartingBy($string))
-  ->toBe("'path' LINES STARTING BY '$output'");
+    expect((string) (new Outfile("path"))->linesStartingBy($string))
+    ->toBe("'path' LINES STARTING BY '$output'");
 
 })
 ->with([
@@ -16,11 +15,10 @@ test("lines starting by", function ($string, $output)
   ["'", "''"],
 ]);
 
-test("lines terminated by", function ($string, $output)
-{
+test("lines terminated by", function ($string, $output) {
 
-  expect((string) (new Outfile("path"))->linesTerminatedBy($string))
-  ->toBe("'path' LINES TERMINATED BY '$output'");
+    expect((string) (new Outfile("path"))->linesTerminatedBy($string))
+    ->toBe("'path' LINES TERMINATED BY '$output'");
 
 })
 ->with([
@@ -28,14 +26,13 @@ test("lines terminated by", function ($string, $output)
   ["'", "''"],
 ]);
 
-test("lines", function ()
-{
+test("lines", function () {
 
-  expect(
-    (string) (new Outfile("path"))
+    expect(
+        (string) (new Outfile("path"))
     ->linesStartingBy(":")
     ->linesTerminatedBy('\n')
-  )
-  ->toBe('\'path\' LINES STARTING BY \':\' TERMINATED BY \'\n\'');
+    )
+    ->toBe('\'path\' LINES STARTING BY \':\' TERMINATED BY \'\n\'');
 
 });

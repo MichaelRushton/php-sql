@@ -5,11 +5,10 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("select", function ()
-{
+test("select", function () {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->with("cte", "SELECT")
     ->distinct()
     ->highPriority()
@@ -34,53 +33,52 @@ test("select", function ()
     ->intoVar("v1")
     ->forUpdate()
     ->lockInShareMode()
-  )
-  ->toBe(implode(" ", [
-    "WITH cte AS (SELECT)",
-    "SELECT",
-    "DISTINCT",
-    "HIGH_PRIORITY",
-    "STRAIGHT_JOIN",
-    "SQL_SMALL_RESULT",
-    "SQL_BIG_RESULT",
-    "SQL_BUFFER_RESULT",
-    "SQL_CACHE",
-    "SQL_CALC_FOUND_ROWS",
-    "c1",
-    "FROM t1",
-    "JOIN t1",
-    "WHERE c1",
-    "GROUP BY c1",
-    "HAVING c1",
-    "UNION SELECT",
-    "ORDER BY c1",
-    "LIMIT 1",
-    "ROWS EXAMINED 1",
-    "INTO OUTFILE '/tmp/file'",
-    "INTO DUMPFILE '/tmp/file'",
-    "INTO @v1",
-    "FOR UPDATE",
-    "LOCK IN SHARE MODE",
-  ]));
+    )
+    ->toBe(implode(" ", [
+      "WITH cte AS (SELECT)",
+      "SELECT",
+      "DISTINCT",
+      "HIGH_PRIORITY",
+      "STRAIGHT_JOIN",
+      "SQL_SMALL_RESULT",
+      "SQL_BIG_RESULT",
+      "SQL_BUFFER_RESULT",
+      "SQL_CACHE",
+      "SQL_CALC_FOUND_ROWS",
+      "c1",
+      "FROM t1",
+      "JOIN t1",
+      "WHERE c1",
+      "GROUP BY c1",
+      "HAVING c1",
+      "UNION SELECT",
+      "ORDER BY c1",
+      "LIMIT 1",
+      "ROWS EXAMINED 1",
+      "INTO OUTFILE '/tmp/file'",
+      "INTO DUMPFILE '/tmp/file'",
+      "INTO @v1",
+      "FOR UPDATE",
+      "LOCK IN SHARE MODE",
+    ]));
 
 });
 
-test("select offset fetch", function ()
-{
+test("select offset fetch", function () {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->orderBy("c1")
     ->offsetFetch(1, 2)
     ->withTies()
     ->rowsExamined(1)
-  )
-  ->toBe(implode(" ", [
-    "SELECT",
-    "*",
-    "ORDER BY c1",
-    "OFFSET 1 ROWS FETCH NEXT 2 ROWS WITH TIES",
-    "ROWS EXAMINED 1"
-  ]));
+    )
+    ->toBe(implode(" ", [
+      "SELECT",
+      "*",
+      "ORDER BY c1",
+      "OFFSET 1 ROWS FETCH NEXT 2 ROWS WITH TIES",
+      "ROWS EXAMINED 1"
+    ]));
 
 });

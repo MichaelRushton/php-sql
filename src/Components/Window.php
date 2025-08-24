@@ -15,36 +15,37 @@ use Stringable;
 
 class Window implements WindowInterface, HasBindings, Stringable
 {
+    use Bindings;
+    use FrameSpec;
+    use OrderBy;
+    use PartitionBy;
+    use SpecName;
 
-  use Bindings;
-  use FrameSpec;
-  use OrderBy;
-  use PartitionBy;
-  use SpecName;
+    public function __construct(public readonly string $name)
+    {
+    }
 
-  public function __construct(public readonly string $name) {}
+    protected function getSpec(): string
+    {
 
-  protected function getSpec(): string
-  {
+        return implode(" ", array_filter([
+          $this->spec_name,
+          $this->getPartitionBy(),
+          $this->getOrderBy(),
+          $this->getFrameSpec(),
+        ], "strlen"));
 
-    return implode(" ", array_filter([
-      $this->spec_name,
-      $this->getPartitionBy(),
-      $this->getOrderBy(),
-      $this->getFrameSpec(),
-    ], "strlen"));
+    }
 
-  }
+    public function __toString(): string
+    {
 
-  public function __toString(): string
-  {
+        $this->bindings = [];
 
-    $this->bindings = [];
+        $spec = $this->getSpec();
 
-    $spec = $this->getSpec();
+        return "$this->name AS ($spec)";
 
-    return "$this->name AS ($spec)";
-
-  }
+    }
 
 }

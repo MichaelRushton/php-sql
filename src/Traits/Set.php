@@ -10,62 +10,55 @@ use Stringable;
 
 trait Set
 {
+    protected array $set = [];
 
-  protected array $set = [];
+    public function set(
+        string|array $column,
+        string|Stringable|int|float|bool|null $value = null
+    ): static {
 
-  public function set(
-    string|array $column,
-    string|Stringable|int|float|bool|null $value = null
-  ): static
-  {
+        if (is_array($column)) {
+            return $this->setArray($column);
+        }
 
-    if (is_array($column))
-    {
-      return $this->setArray($column);
-    }
+        $this->set[$column] = SQL::value($value);
 
-    $this->set[$column] = SQL::value($value);
-
-    return $this;
-
-  }
-
-  protected function setArray(array $columns): static
-  {
-
-    foreach ($columns as $column => $value)
-    {
-      $this->set($column, $value);
-    }
-
-    return $this;
-
-  }
-
-  protected function getSet(): string
-  {
-
-    if (empty($this->set))
-    {
-      return "";
-    }
-
-    foreach ($this->set as $column => $value)
-    {
-
-      $set[] = "$column = $value";
-
-      if ($value instanceof HasBindings)
-      {
-        $this->mergeBindings($value);
-      }
+        return $this;
 
     }
 
-    $set = implode(", ", $set);
+    protected function setArray(array $columns): static
+    {
 
-    return "SET $set";
+        foreach ($columns as $column => $value) {
+            $this->set($column, $value);
+        }
 
-  }
+        return $this;
+
+    }
+
+    protected function getSet(): string
+    {
+
+        if (empty($this->set)) {
+            return "";
+        }
+
+        foreach ($this->set as $column => $value) {
+
+            $set[] = "$column = $value";
+
+            if ($value instanceof HasBindings) {
+                $this->mergeBindings($value);
+            }
+
+        }
+
+        $set = implode(", ", $set);
+
+        return "SET $set";
+
+    }
 
 }

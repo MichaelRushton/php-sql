@@ -6,43 +6,42 @@ namespace MichaelRushton\SQL\Traits;
 
 trait LockInShareMode
 {
+    protected string $lock_in_share_mode = "";
 
-  protected string $lock_in_share_mode = "";
+    public function lockInShareMode(): static
+    {
 
-  public function lockInShareMode(): static
-  {
+        $this->lock_in_share_mode = "LOCK IN SHARE MODE";
 
-    $this->lock_in_share_mode = "LOCK IN SHARE MODE";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function lockInShareModeWait(int $seconds): static
+    {
 
-  public function lockInShareModeWait(int $seconds): static
-  {
+        $this->lock_in_share_mode = "LOCK IN SHARE MODE WAIT $seconds";
 
-    $this->lock_in_share_mode = "LOCK IN SHARE MODE WAIT $seconds";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function lockInShareModeNoWait(): static
+    {
 
-  public function lockInShareModeNoWait(): static
-  {
+        $this->lock_in_share_mode = "LOCK IN SHARE MODE NOWAIT";
 
-    $this->lock_in_share_mode = "LOCK IN SHARE MODE NOWAIT";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function lockInShareModeSkipLocked(): static
+    {
 
-  public function lockInShareModeSkipLocked(): static
-  {
+        $this->lock_in_share_mode = "LOCK IN SHARE MODE SKIP LOCKED";
 
-    $this->lock_in_share_mode = "LOCK IN SHARE MODE SKIP LOCKED";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

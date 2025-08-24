@@ -5,46 +5,42 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("lock in share mode", function ()
-{
+test("lock in share mode", function () {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->lockInShareMode()
-  )
-  ->toBe("SELECT * LOCK IN SHARE MODE");
+    )
+    ->toBe("SELECT * LOCK IN SHARE MODE");
 
 });
 
-test("lock in share mode wait", function ()
-{
+test("lock in share mode wait", function () {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->lockInShareModeWait(1)
-  )
-  ->toBe("SELECT * LOCK IN SHARE MODE WAIT 1");
+    )
+    ->toBe("SELECT * LOCK IN SHARE MODE WAIT 1");
 
 });
 
-test("lock in share mode nowait", function ()
-{
+test("lock in share mode nowait", function () {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->lockInShareModeNoWait()
-  )
-  ->toBe("SELECT * LOCK IN SHARE MODE NOWAIT");
+    )
+    ->toBe("SELECT * LOCK IN SHARE MODE NOWAIT");
 
 });
 
-test("lock in share mode skip locked", function ()
-{
+test("lock in share mode skip locked", function () {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->lockInShareModeSkipLocked()
-  )
-  ->toBe("SELECT * LOCK IN SHARE MODE SKIP LOCKED");
+    )
+    ->toBe("SELECT * LOCK IN SHARE MODE SKIP LOCKED");
 
 });

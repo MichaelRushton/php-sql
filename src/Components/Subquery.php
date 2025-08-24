@@ -18,48 +18,48 @@ use Stringable;
 
 class Subquery implements SubqueryInterface, HasBindings, Stringable
 {
+    use Alias;
+    use All;
+    use Any;
+    use Bindings;
+    use Columns;
+    use Exists;
+    use In;
+    use Lateral;
 
-  use Alias;
-  use All;
-  use Any;
-  use Bindings;
-  use Columns;
-  use Exists;
-  use In;
-  use Lateral;
-
-  public function __construct(protected string|Stringable $stmt) {}
-
-  protected function getStmt(): string
-  {
-
-    $stmt = "($this->stmt)";
-
-    if ($this->stmt instanceof HasBindings)
+    public function __construct(protected string|Stringable $stmt)
     {
-      $this->mergeBindings($this->stmt);
     }
 
-    return $stmt;
+    protected function getStmt(): string
+    {
 
-  }
+        $stmt = "($this->stmt)";
 
-  public function __toString(): string
-  {
+        if ($this->stmt instanceof HasBindings) {
+            $this->mergeBindings($this->stmt);
+        }
 
-    $this->bindings = [];
+        return $stmt;
 
-    return implode(" ", array_filter([
-      $this->all,
-      $this->any,
-      $this->exists,
-      $this->in,
-      $this->lateral,
-      $this->getStmt(),
-      $this->alias,
-      $this->getColumns(),
-    ], "strlen"));
+    }
 
-  }
+    public function __toString(): string
+    {
+
+        $this->bindings = [];
+
+        return implode(" ", array_filter([
+          $this->all,
+          $this->any,
+          $this->exists,
+          $this->in,
+          $this->lateral,
+          $this->getStmt(),
+          $this->alias,
+          $this->getColumns(),
+        ], "strlen"));
+
+    }
 
 }

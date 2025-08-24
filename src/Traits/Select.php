@@ -10,35 +10,32 @@ use Stringable;
 
 trait Select
 {
+    protected string|Stringable $select = "";
 
-  protected string|Stringable $select = "";
-
-  public function select(string|Stringable|Closure $stmt): static
-  {
-
-    if ($stmt instanceof Closure)
+    public function select(string|Stringable|Closure $stmt): static
     {
-      $stmt->call($stmt = $this->sql()->select(), $stmt);
+
+        if ($stmt instanceof Closure) {
+            $stmt->call($stmt = $this->sql()->select(), $stmt);
+        }
+
+        $this->select = $stmt;
+
+        return $this;
+
     }
 
-    $this->select = $stmt;
-
-    return $this;
-
-  }
-
-  protected function getSelect(): string
-  {
-
-    $select = "$this->select";
-
-    if ($this->select instanceof HasBindings)
+    protected function getSelect(): string
     {
-      $this->mergeBindings($this->select);
+
+        $select = "$this->select";
+
+        if ($this->select instanceof HasBindings) {
+            $this->mergeBindings($this->select);
+        }
+
+        return $select;
+
     }
-
-    return $select;
-
-  }
 
 }

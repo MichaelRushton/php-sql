@@ -6,9 +6,8 @@ namespace MichaelRushton\SQL\Contracts\Traits;
 
 interface HasBindings
 {
+    public function bindings(): array;
 
-  public function bindings(): array;
-
-  public function mergeBindings(HasBindings $from): void;
+    public function mergeBindings(HasBindings $from): void;
 
 }

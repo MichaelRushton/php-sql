@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait SQLSmallResult
 {
+    protected string $sql_small_result = "";
 
-  protected string $sql_small_result = "";
+    public function sqlSmallResult(): static
+    {
 
-  public function sqlSmallResult(): static
-  {
+        $this->sql_small_result = "SQL_SMALL_RESULT";
 
-    $this->sql_small_result = "SQL_SMALL_RESULT";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

@@ -6,33 +6,30 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Columns
 {
+    protected array $columns = [];
 
-  protected array $columns = [];
-
-  public function columns(string|array $columns): static
-  {
-
-    foreach ((array) $columns as $column)
+    public function columns(string|array $columns): static
     {
-      $this->columns[] = $column;
+
+        foreach ((array) $columns as $column) {
+            $this->columns[] = $column;
+        }
+
+        return $this;
+
     }
 
-    return $this;
-
-  }
-
-  protected function getColumns(): string
-  {
-
-    if (empty($this->columns))
+    protected function getColumns(): string
     {
-      return "";
+
+        if (empty($this->columns)) {
+            return "";
+        }
+
+        $columns = implode(", ", $this->columns);
+
+        return "($columns)";
+
     }
-
-    $columns = implode(", ", $this->columns);
-
-    return "($columns)";
-
-  }
 
 }

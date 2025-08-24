@@ -5,11 +5,10 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("select", function ()
-{
+test("select", function () {
 
-  expect(
-    (string) (new Select(SQL::MySQL))
+    expect(
+        (string) (new Select(SQL::MySQL))
     ->with("cte", "SELECT")
     ->distinct()
     ->highPriority()
@@ -34,33 +33,33 @@ test("select", function ()
     ->forUpdate()
     ->forShare()
     ->lockInShareMode()
-  )
-  ->toBe(implode(" ", [
-    "WITH cte AS (SELECT)",
-    "SELECT",
-    "DISTINCT",
-    "HIGH_PRIORITY",
-    "STRAIGHT_JOIN",
-    "SQL_SMALL_RESULT",
-    "SQL_BIG_RESULT",
-    "SQL_BUFFER_RESULT",
-    "SQL_CALC_FOUND_ROWS",
-    "c1",
-    "FROM t1",
-    "JOIN t1",
-    "WHERE c1",
-    "GROUP BY c1",
-    "HAVING c1",
-    "WINDOW w AS ()",
-    "UNION SELECT",
-    "ORDER BY c1",
-    "LIMIT 1",
-    "INTO OUTFILE '/tmp/file'",
-    "INTO DUMPFILE '/tmp/file'",
-    "INTO @v1",
-    "FOR UPDATE",
-    "FOR SHARE",
-    "LOCK IN SHARE MODE",
-  ]));
+    )
+    ->toBe(implode(" ", [
+      "WITH cte AS (SELECT)",
+      "SELECT",
+      "DISTINCT",
+      "HIGH_PRIORITY",
+      "STRAIGHT_JOIN",
+      "SQL_SMALL_RESULT",
+      "SQL_BIG_RESULT",
+      "SQL_BUFFER_RESULT",
+      "SQL_CALC_FOUND_ROWS",
+      "c1",
+      "FROM t1",
+      "JOIN t1",
+      "WHERE c1",
+      "GROUP BY c1",
+      "HAVING c1",
+      "WINDOW w AS ()",
+      "UNION SELECT",
+      "ORDER BY c1",
+      "LIMIT 1",
+      "INTO OUTFILE '/tmp/file'",
+      "INTO DUMPFILE '/tmp/file'",
+      "INTO @v1",
+      "FOR UPDATE",
+      "FOR SHARE",
+      "LOCK IN SHARE MODE",
+    ]));
 
 });

@@ -9,45 +9,40 @@ use Stringable;
 
 trait SelectColumns
 {
+    protected array $columns = [];
 
-  protected array $columns = [];
-
-  public function columns(string|Stringable|int|float|array $columns): static
-  {
-
-    $columns = is_array($columns) ? $columns : [$columns];
-
-    foreach ($columns as $column)
-    {
-      $this->columns[] = $column;
-    }
-
-    return $this;
-
-  }
-
-  protected function getColumns(): string
-  {
-
-    if (empty($this->columns))
-    {
-      return "*";
-    }
-
-    $columns = implode(", ", $this->columns);
-
-    foreach ($this->columns as $column)
+    public function columns(string|Stringable|int|float|array $columns): static
     {
 
-      if ($column instanceof HasBindings)
-      {
-        $this->mergeBindings($column);
-      }
+        $columns = is_array($columns) ? $columns : [$columns];
+
+        foreach ($columns as $column) {
+            $this->columns[] = $column;
+        }
+
+        return $this;
 
     }
 
-    return $columns;
+    protected function getColumns(): string
+    {
 
-  }
+        if (empty($this->columns)) {
+            return "*";
+        }
+
+        $columns = implode(", ", $this->columns);
+
+        foreach ($this->columns as $column) {
+
+            if ($column instanceof HasBindings) {
+                $this->mergeBindings($column);
+            }
+
+        }
+
+        return $columns;
+
+    }
 
 }

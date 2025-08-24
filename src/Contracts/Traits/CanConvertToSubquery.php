@@ -8,5 +8,5 @@ use MichaelRushton\SQL\Contracts\Components\SubqueryInterface;
 
 interface CanConvertToSubquery
 {
-  public function toSubquery(): SubqueryInterface;
+    public function toSubquery(): SubqueryInterface;
 }

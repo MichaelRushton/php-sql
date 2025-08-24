@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait SQLBigResult
 {
+    protected string $sql_big_result = "";
 
-  protected string $sql_big_result = "";
+    public function sqlBigResult(): static
+    {
 
-  public function sqlBigResult(): static
-  {
+        $this->sql_big_result = "SQL_BIG_RESULT";
 
-    $this->sql_big_result = "SQL_BIG_RESULT";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

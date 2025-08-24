@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Insert;
 
-test("returning", function ($columns, $expected, $bindings = [])
-{
+test("returning", function ($columns, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Insert(SQL::MariaDB))
+    expect(
+        (string) $stmt = (new Insert(SQL::MariaDB))
     ->returning($columns)
-  )
-  ->toBe("INSERT VALUES () RETURNING $expected");
+    )
+    ->toBe("INSERT VALUES () RETURNING $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

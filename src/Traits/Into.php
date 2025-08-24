@@ -8,16 +8,15 @@ use Stringable;
 
 trait Into
 {
+    protected string $into = "";
 
-  protected string $into = "";
+    public function into(string|Stringable $table): static
+    {
 
-  public function into(string|Stringable $table): static
-  {
+        $this->into = "INTO $table";
 
-    $this->into = "INTO $table";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

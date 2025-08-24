@@ -7,17 +7,16 @@ use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Insert;
 use MichaelRushton\SQL\Statements\Select;
 
-test("select", function ($stmt, $expected, $bindings = [])
-{
+test("select", function ($stmt, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Insert(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Insert(SQL::SQLite))
     ->select($stmt)
-  )
-  ->toBe("INSERT $expected");
+    )
+    ->toBe("INSERT $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

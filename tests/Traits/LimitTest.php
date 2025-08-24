@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("limit", function ($row_count, $expected, $bindings = [])
-{
+test("limit", function ($row_count, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->limit($row_count)
-  )
-  ->toBe("SELECT * LIMIT $expected");
+    )
+    ->toBe("SELECT * LIMIT $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -25,17 +24,16 @@ test("limit", function ($row_count, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("limit offset", function ($offset, $expected, $bindings = [])
-{
+test("limit offset", function ($offset, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->limit(1, $offset)
-  )
-  ->toBe("SELECT * LIMIT 1 OFFSET $expected");
+    )
+    ->toBe("SELECT * LIMIT 1 OFFSET $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

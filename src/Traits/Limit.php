@@ -9,59 +9,53 @@ use Stringable;
 
 trait Limit
 {
+    use RowCount;
 
-  use RowCount;
+    public function limit(
+        int|string|Stringable $row_count,
+        int|string|Stringable|null $offset = null
+    ): static {
 
-  public function limit(
-    int|string|Stringable $row_count,
-    int|string|Stringable|null $offset = null
-  ): static
-  {
+        $this->row_count = $row_count;
 
-    $this->row_count = $row_count;
+        $this->offset = $offset ?? "";
 
-    $this->offset = $offset ?? "";
+        return $this;
 
-    return $this;
-
-  }
-
-  protected function getOffset(): string
-  {
-
-    if ("" === $this->offset)
-    {
-      return "";
     }
 
-    $offset = " OFFSET $this->offset";
-
-    if ($this->offset instanceof HasBindings)
+    protected function getOffset(): string
     {
-      $this->mergeBindings($this->offset);
+
+        if ("" === $this->offset) {
+            return "";
+        }
+
+        $offset = " OFFSET $this->offset";
+
+        if ($this->offset instanceof HasBindings) {
+            $this->mergeBindings($this->offset);
+        }
+
+        return $offset;
+
     }
 
-    return $offset;
-
-  }
-
-  protected function getLimit(): string
-  {
-
-    if ("" === $this->row_count || "" !== ($this->with_ties ?? ""))
+    protected function getLimit(): string
     {
-      return "";
+
+        if ("" === $this->row_count || "" !== ($this->with_ties ?? "")) {
+            return "";
+        }
+
+        $limit = "LIMIT $this->row_count";
+
+        if ($this->row_count instanceof HasBindings) {
+            $this->mergeBindings($this->row_count);
+        }
+
+        return $limit . $this->getOffset();
+
     }
-
-    $limit = "LIMIT $this->row_count";
-
-    if ($this->row_count instanceof HasBindings)
-    {
-      $this->mergeBindings($this->row_count);
-    }
-
-    return $limit . $this->getOffset();
-
-  }
 
 }

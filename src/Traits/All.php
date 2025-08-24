@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait All
 {
+    protected string $all = "";
 
-  protected string $all = "";
+    public function all(): static
+    {
 
-  public function all(): static
-  {
+        $this->all = "ALL";
 
-    $this->all = "ALL";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

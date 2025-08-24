@@ -5,14 +5,13 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Insert;
 
-test("columns", function ($columns, $expected)
-{
+test("columns", function ($columns, $expected) {
 
-  expect(
-    (string) (new Insert(SQL::SQLite))
+    expect(
+        (string) (new Insert(SQL::SQLite))
     ->columns($columns)
-  )
-  ->toBe("INSERT ($expected) DEFAULT VALUES");
+    )
+    ->toBe("INSERT ($expected) DEFAULT VALUES");
 
 })
 ->with([

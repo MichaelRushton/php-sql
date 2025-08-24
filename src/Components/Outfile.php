@@ -13,26 +13,25 @@ use Stringable;
 
 class Outfile implements OutfileInterface, Stringable
 {
+    use CharacterSet;
+    use Fields;
+    use Lines;
 
-  use CharacterSet;
-  use Fields;
-  use Lines;
+    public function __construct(protected string $path)
+    {
+        $this->path = SQL::escape($path);
+    }
 
-  public function __construct(protected string $path)
-  {
-    $this->path = SQL::escape($path);
-  }
+    public function __toString(): string
+    {
 
-  public function __toString(): string
-  {
+        return implode(" ", array_filter([
+          "'$this->path'",
+          $this->character_set,
+          $this->getFields(),
+          $this->getLines(),
+        ], "strlen"));
 
-    return implode(" ", array_filter([
-      "'$this->path'",
-      $this->character_set,
-      $this->getFields(),
-      $this->getLines(),
-    ], "strlen"));
-
-  }
+    }
 
 }

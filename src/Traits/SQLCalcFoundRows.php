@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait SQLCalcFoundRows
 {
+    protected string $sql_calc_found_rows = "";
 
-  protected string $sql_calc_found_rows = "";
+    public function sqlCalcFoundRows(): static
+    {
 
-  public function sqlCalcFoundRows(): static
-  {
+        $this->sql_calc_found_rows = "SQL_CALC_FOUND_ROWS";
 
-    $this->sql_calc_found_rows = "SQL_CALC_FOUND_ROWS";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

@@ -5,14 +5,13 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("for share", function ($table, $expected)
-{
+test("for share", function ($table, $expected) {
 
-  expect(
-    (string) (new Select(SQL::PostgreSQL))
+    expect(
+        (string) (new Select(SQL::PostgreSQL))
     ->forShare($table)
-  )
-  ->toBe("SELECT * FOR SHARE$expected");
+    )
+    ->toBe("SELECT * FOR SHARE$expected");
 
 })
 ->with([
@@ -21,14 +20,13 @@ test("for share", function ($table, $expected)
   [["t1", "t2"], " OF t1, t2"],
 ]);
 
-test("for share nowait", function ($table, $expected)
-{
+test("for share nowait", function ($table, $expected) {
 
-  expect(
-    (string) (new Select(SQL::PostgreSQL))
+    expect(
+        (string) (new Select(SQL::PostgreSQL))
     ->forShareNoWait($table)
-  )
-  ->toBe("SELECT * FOR SHARE$expected NOWAIT");
+    )
+    ->toBe("SELECT * FOR SHARE$expected NOWAIT");
 
 })
 ->with([
@@ -37,14 +35,13 @@ test("for share nowait", function ($table, $expected)
   [["t1", "t2"], " OF t1, t2"],
 ]);
 
-test("for share skip locked", function ($table, $expected)
-{
+test("for share skip locked", function ($table, $expected) {
 
-  expect(
-    (string) (new Select(SQL::PostgreSQL))
+    expect(
+        (string) (new Select(SQL::PostgreSQL))
     ->forShareSkipLocked($table)
-  )
-  ->toBe("SELECT * FOR SHARE$expected SKIP LOCKED");
+    )
+    ->toBe("SELECT * FOR SHARE$expected SKIP LOCKED");
 
 })
 ->with([

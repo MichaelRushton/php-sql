@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Alias
 {
+    protected string $alias = "";
 
-  protected string $alias = "";
+    public function as(string $alias): static
+    {
 
-  public function as(string $alias): static
-  {
+        $this->alias = "AS $alias";
 
-    $this->alias = "AS $alias";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

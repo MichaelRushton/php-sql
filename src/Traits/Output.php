@@ -9,45 +9,40 @@ use Stringable;
 
 trait Output
 {
+    protected array $output = [];
 
-  protected array $output = [];
-
-  public function output(string|Stringable|int|float|array $columns): static
-  {
-
-    $columns = is_array($columns) ? $columns : [$columns];
-
-    foreach ($columns as $column)
-    {
-      $this->output[] = $column;
-    }
-
-    return $this;
-
-  }
-
-  protected function getOutput(): string
-  {
-
-    if (empty($this->output))
-    {
-      return "";
-    }
-
-    $output = implode(", ", $this->output);
-
-    foreach ($this->output as $column)
+    public function output(string|Stringable|int|float|array $columns): static
     {
 
-      if ($column instanceof HasBindings)
-      {
-        $this->mergeBindings($column);
-      }
+        $columns = is_array($columns) ? $columns : [$columns];
+
+        foreach ($columns as $column) {
+            $this->output[] = $column;
+        }
+
+        return $this;
 
     }
 
-    return "OUTPUT $output";
+    protected function getOutput(): string
+    {
 
-  }
+        if (empty($this->output)) {
+            return "";
+        }
+
+        $output = implode(", ", $this->output);
+
+        foreach ($this->output as $column) {
+
+            if ($column instanceof HasBindings) {
+                $this->mergeBindings($column);
+            }
+
+        }
+
+        return "OUTPUT $output";
+
+    }
 
 }

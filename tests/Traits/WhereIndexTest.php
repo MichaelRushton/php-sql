@@ -7,17 +7,16 @@ use MichaelRushton\SQL\Components\Upsert;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("where index single column", function ($column, $expected, $bindings = [])
-{
+test("where index single column", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($upsert = new Upsert)
+    expect(
+        (string) ($upsert = new Upsert())
     ->whereIndex($column)
-  )
-  ->toBe("WHERE $expected DO NOTHING");
+    )
+    ->toBe("WHERE $expected DO NOTHING");
 
-  expect($upsert->bindings())
-  ->toBe($bindings);
+    expect($upsert->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -30,17 +29,16 @@ test("where index single column", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "c1 = ? AND c2 = ?", ["test", 1]],
 ]);
 
-test("where index implicit operator", function ($value, $expected, $bindings = [])
-{
+test("where index implicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($upsert = new Upsert)
+    expect(
+        (string) ($upsert = new Upsert())
     ->whereIndex("c1", $value)
-  )
-  ->toBe("WHERE c1 $expected DO NOTHING");
+    )
+    ->toBe("WHERE c1 $expected DO NOTHING");
 
-  expect($upsert->bindings())
-  ->toBe($bindings);
+    expect($upsert->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -53,17 +51,16 @@ test("where index implicit operator", function ($value, $expected, $bindings = [
   [new Select(SQL::SQLite), "= (SELECT *)"],
 ]);
 
-test("where index explicit operator", function ($value, $expected, $bindings = [])
-{
+test("where index explicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($upsert = new Upsert)
+    expect(
+        (string) ($upsert = new Upsert())
     ->whereIndex("c1", "!=", $value)
-  )
-  ->toBe("WHERE c1 != $expected DO NOTHING");
+    )
+    ->toBe("WHERE c1 != $expected DO NOTHING");
 
-  expect($upsert->bindings())
-  ->toBe($bindings);
+    expect($upsert->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -76,20 +73,18 @@ test("where index explicit operator", function ($value, $expected, $bindings = [
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where index callback", function ($column, $expected, $bindings = [])
-{
+test("where index callback", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($upsert = new Upsert)
-    ->whereIndex(function () use ($column)
-    {
-      $this->where($column);
+    expect(
+        (string) ($upsert = new Upsert())
+    ->whereIndex(function () use ($column) {
+        $this->where($column);
     })
-  )
-  ->toBe("WHERE $expected DO NOTHING");
+    )
+    ->toBe("WHERE $expected DO NOTHING");
 
-  expect($upsert->bindings())
-  ->toBe($bindings);
+    expect($upsert->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

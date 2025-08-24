@@ -11,36 +11,32 @@ use Stringable;
 
 class Where implements HasBindings, Stringable
 {
+    use Bindings;
+    use TraitsWhere;
 
-  use Bindings;
-  use TraitsWhere;
-
-  public function __toString(): string
-  {
-
-    if (empty($this->where))
-    {
-      return "";
-    }
-
-    $this->bindings = [];
-
-    foreach ($this->where as [$prefix, $predicate])
+    public function __toString(): string
     {
 
-      $where[] = "$prefix$predicate";
+        if (empty($this->where)) {
+            return "";
+        }
 
-      if ($predicate instanceof HasBindings)
-      {
-        $this->mergeBindings($predicate);
-      }
+        $this->bindings = [];
+
+        foreach ($this->where as [$prefix, $predicate]) {
+
+            $where[] = "$prefix$predicate";
+
+            if ($predicate instanceof HasBindings) {
+                $this->mergeBindings($predicate);
+            }
+
+        }
+
+        $where = implode(" ", $where);
+
+        return 1 === count($this->where) ? $where : "($where)";
 
     }
-
-    $where = implode(" ", $where);
-
-    return 1 === count($this->where) ? $where : "($where)";
-
-  }
 
 }

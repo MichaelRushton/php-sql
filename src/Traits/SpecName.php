@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait SpecName
 {
+    protected string $spec_name = "";
 
-  protected string $spec_name = "";
+    public function specName(string $name): static
+    {
 
-  public function specName(string $name): static
-  {
+        $this->spec_name = $name;
 
-    $this->spec_name = $name;
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

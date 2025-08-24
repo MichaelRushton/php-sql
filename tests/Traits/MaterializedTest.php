@@ -4,24 +4,22 @@ declare(strict_types=1);
 
 use MichaelRushton\SQL\Components\CTE;
 
-test("materialized", function ()
-{
+test("materialized", function () {
 
-  expect(
-    (string) (new CTE("cte", "SELECT"))
+    expect(
+        (string) (new CTE("cte", "SELECT"))
     ->materialized()
-  )
-  ->toBe("cte AS MATERIALIZED (SELECT)");
+    )
+    ->toBe("cte AS MATERIALIZED (SELECT)");
 
 });
 
-test("not materialized", function ()
-{
+test("not materialized", function () {
 
-  expect(
-    (string) (new CTE("cte", "SELECT"))
+    expect(
+        (string) (new CTE("cte", "SELECT"))
     ->notMaterialized()
-  )
-  ->toBe("cte AS NOT MATERIALIZED (SELECT)");
+    )
+    ->toBe("cte AS NOT MATERIALIZED (SELECT)");
 
 });

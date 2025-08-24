@@ -9,47 +9,44 @@ use Stringable;
 
 trait Top
 {
+    use WithTies;
 
-  protected int|float|string|Stringable $top = "";
-  protected string $percent = "";
+    protected int|float|string|Stringable $top = "";
+    protected string $percent = "";
 
-  use WithTies;
-
-  public function top(int|float|string|Stringable $row_count): static
-  {
-
-    $this->top = $row_count;
-
-    return $this;
-
-  }
-
-  public function percent(): static
-  {
-
-    $this->percent = " PERCENT";
-
-    return $this;
-
-  }
-
-  protected function getTop(): string
-  {
-
-    if ("" === $this->top)
+    public function top(int|float|string|Stringable $row_count): static
     {
-      return "";
+
+        $this->top = $row_count;
+
+        return $this;
+
     }
 
-    $top = "TOP ($this->top)$this->percent$this->with_ties";
-
-    if ($this->top instanceof HasBindings)
+    public function percent(): static
     {
-      $this->mergeBindings($this->top);
+
+        $this->percent = " PERCENT";
+
+        return $this;
+
     }
 
-    return $top;
+    protected function getTop(): string
+    {
 
-  }
+        if ("" === $this->top) {
+            return "";
+        }
+
+        $top = "TOP ($this->top)$this->percent$this->with_ties";
+
+        if ($this->top instanceof HasBindings) {
+            $this->mergeBindings($this->top);
+        }
+
+        return $top;
+
+    }
 
 }

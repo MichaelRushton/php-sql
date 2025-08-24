@@ -16,49 +16,48 @@ use Stringable;
 
 class CTE implements CTEInterface, HasBindings, Stringable
 {
+    use Bindings;
+    use Columns;
+    use Cycle;
+    use CycleRestrict;
+    use Materialized;
+    use Search;
 
-  use Bindings;
-  use Columns;
-  use Cycle;
-  use CycleRestrict;
-  use Materialized;
-  use Search;
-
-  public function __construct(
-    public readonly string $name,
-    public readonly string|Stringable $stmt
-  ) {}
-
-  protected function getStmt(): string
-  {
-
-    $stmt = "($this->stmt)";
-
-    if ($this->stmt instanceof HasBindings)
-    {
-      $this->mergeBindings($this->stmt);
+    public function __construct(
+        public readonly string $name,
+        public readonly string|Stringable $stmt
+    ) {
     }
 
-    return $stmt;
+    protected function getStmt(): string
+    {
 
-  }
+        $stmt = "($this->stmt)";
 
-  public function __toString(): string
-  {
+        if ($this->stmt instanceof HasBindings) {
+            $this->mergeBindings($this->stmt);
+        }
 
-    $this->bindings = [];
+        return $stmt;
 
-    return implode(" ", array_filter([
-      $this->name,
-      $this->getColumns(),
-      "AS",
-      $this->materialized,
-      $this->getStmt(),
-      $this->getCycleRestrict(),
-      $this->search,
-      $this->cycle,
-    ], "strlen"));
+    }
 
-  }
+    public function __toString(): string
+    {
+
+        $this->bindings = [];
+
+        return implode(" ", array_filter([
+          $this->name,
+          $this->getColumns(),
+          "AS",
+          $this->materialized,
+          $this->getStmt(),
+          $this->getCycleRestrict(),
+          $this->search,
+          $this->cycle,
+        ], "strlen"));
+
+    }
 
 }

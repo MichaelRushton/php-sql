@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Lateral
 {
+    protected string $lateral = "";
 
-  protected string $lateral = "";
+    public function lateral(): static
+    {
 
-  public function lateral(): static
-  {
+        $this->lateral = "LATERAL";
 
-    $this->lateral = "LATERAL";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

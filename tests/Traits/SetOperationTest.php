@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("union", function ($stmt, $expected, $bindings = [])
-{
+test("union", function ($stmt, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->union($stmt)
-  )
-  ->toBe("SELECT * UNION $expected");
+    )
+    ->toBe("SELECT * UNION $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -26,17 +25,16 @@ test("union", function ($stmt, $expected, $bindings = [])
   [["SELECT 1", "SELECT 2"], "SELECT 1 UNION SELECT 2"],
 ]);
 
-test("union all", function ($stmt, $expected, $bindings = [])
-{
+test("union all", function ($stmt, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->unionAll($stmt)
-  )
-  ->toBe("SELECT * UNION ALL $expected");
+    )
+    ->toBe("SELECT * UNION ALL $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -46,17 +44,16 @@ test("union all", function ($stmt, $expected, $bindings = [])
   [["SELECT 1", "SELECT 2"], "SELECT 1 UNION ALL SELECT 2"],
 ]);
 
-test("intersect", function ($stmt, $expected, $bindings = [])
-{
+test("intersect", function ($stmt, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->intersect($stmt)
-  )
-  ->toBe("SELECT * INTERSECT $expected");
+    )
+    ->toBe("SELECT * INTERSECT $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -66,17 +63,16 @@ test("intersect", function ($stmt, $expected, $bindings = [])
   [["SELECT 1", "SELECT 2"], "SELECT 1 INTERSECT SELECT 2"],
 ]);
 
-test("intersect all", function ($stmt, $expected, $bindings = [])
-{
+test("intersect all", function ($stmt, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->intersectAll($stmt)
-  )
-  ->toBe("SELECT * INTERSECT ALL $expected");
+    )
+    ->toBe("SELECT * INTERSECT ALL $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -86,17 +82,16 @@ test("intersect all", function ($stmt, $expected, $bindings = [])
   [["SELECT 1", "SELECT 2"], "SELECT 1 INTERSECT ALL SELECT 2"],
 ]);
 
-test("except", function ($stmt, $expected, $bindings = [])
-{
+test("except", function ($stmt, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->except($stmt)
-  )
-  ->toBe("SELECT * EXCEPT $expected");
+    )
+    ->toBe("SELECT * EXCEPT $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -106,17 +101,16 @@ test("except", function ($stmt, $expected, $bindings = [])
   [["SELECT 1", "SELECT 2"], "SELECT 1 EXCEPT SELECT 2"],
 ]);
 
-test("except all", function ($stmt, $expected, $bindings = [])
-{
+test("except all", function ($stmt, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->exceptAll($stmt)
-  )
-  ->toBe("SELECT * EXCEPT ALL $expected");
+    )
+    ->toBe("SELECT * EXCEPT ALL $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

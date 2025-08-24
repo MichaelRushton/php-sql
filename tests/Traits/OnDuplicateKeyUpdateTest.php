@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Insert;
 
-test("on duplicate key update", function ($column, $value, $expected, $bindings = [])
-{
+test("on duplicate key update", function ($column, $value, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Insert(SQL::MariaDB))
+    expect(
+        (string) $stmt = (new Insert(SQL::MariaDB))
     ->onDuplicateKeyUpdate($column, $value)
-  )
-  ->toBe("INSERT VALUES () ON DUPLICATE KEY UPDATE $expected");
+    )
+    ->toBe("INSERT VALUES () ON DUPLICATE KEY UPDATE $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

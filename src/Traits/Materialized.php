@@ -6,25 +6,24 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Materialized
 {
+    protected string $materialized = "";
 
-  protected string $materialized = "";
+    public function materialized(): static
+    {
 
-  public function materialized(): static
-  {
+        $this->materialized = "MATERIALIZED";
 
-    $this->materialized = "MATERIALIZED";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function notMaterialized(): static
+    {
 
-  public function notMaterialized(): static
-  {
+        $this->materialized = "NOT MATERIALIZED";
 
-    $this->materialized = "NOT MATERIALIZED";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

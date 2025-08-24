@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Insert;
 
-test("output", function ($columns, $expected, $bindings = [])
-{
+test("output", function ($columns, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Insert(SQL::TransactSQL))
+    expect(
+        (string) $stmt = (new Insert(SQL::TransactSQL))
     ->output($columns)
-  )
-  ->toBe("INSERT OUTPUT $expected DEFAULT VALUES");
+    )
+    ->toBe("INSERT OUTPUT $expected DEFAULT VALUES");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

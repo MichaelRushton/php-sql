@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Only
 {
+    protected string $only = "";
 
-  protected string $only = "";
+    public function only(): static
+    {
 
-  public function only(): static
-  {
+        $this->only = "ONLY";
 
-    $this->only = "ONLY";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

@@ -10,36 +10,32 @@ use Stringable;
 
 trait IntoOutfile
 {
+    protected string|Stringable $into_outfile = "";
 
-  protected string|Stringable $into_outfile = "";
+    public function intoOutfile(
+        string $path,
+        ?Closure $callback = null
+    ): static {
 
-  public function intoOutfile(
-    string $path,
-    ?Closure $callback = null
-  ): static
-  {
+        $this->into_outfile = $outfile = new Outfile($path);
 
-    $this->into_outfile = $outfile = new Outfile($path);
+        if ($callback) {
+            $callback->call($outfile, $outfile);
+        }
 
-    if ($callback)
-    {
-      $callback->call($outfile, $outfile);
+        return $this;
+
     }
 
-    return $this;
-
-  }
-
-  protected function getIntoOutfile(): string
-  {
-
-    if ("" === $this->into_outfile)
+    protected function getIntoOutfile(): string
     {
-      return "";
+
+        if ("" === $this->into_outfile) {
+            return "";
+        }
+
+        return "INTO OUTFILE $this->into_outfile";
+
     }
-
-    return "INTO OUTFILE $this->into_outfile";
-
-  }
 
 }

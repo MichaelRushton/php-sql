@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait In
 {
+    protected string $in = "";
 
-  protected string $in = "";
+    public function in(): static
+    {
 
-  public function in(): static
-  {
+        $this->in = "IN";
 
-    $this->in = "IN";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

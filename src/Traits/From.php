@@ -10,45 +10,40 @@ use Stringable;
 
 trait From
 {
+    protected array $from = [];
 
-  protected array $from = [];
-
-  public function from(string|Stringable|array $table): static
-  {
-
-    $tables = is_array($table) ? $table : [$table];
-
-    foreach ($tables as $table)
-    {
-      $this->from[] = SQL::identifier($table);
-    }
-
-    return $this;
-
-  }
-
-  protected function getFrom(): string
-  {
-
-    if (empty($this->from))
-    {
-      return "";
-    }
-
-    $from = implode(", ", $this->from);
-
-    foreach ($this->from as $table)
+    public function from(string|Stringable|array $table): static
     {
 
-      if ($table instanceof HasBindings)
-      {
-        $this->mergeBindings($table);
-      }
+        $tables = is_array($table) ? $table : [$table];
+
+        foreach ($tables as $table) {
+            $this->from[] = SQL::identifier($table);
+        }
+
+        return $this;
 
     }
 
-    return "FROM $from";
+    protected function getFrom(): string
+    {
 
-  }
+        if (empty($this->from)) {
+            return "";
+        }
+
+        $from = implode(", ", $this->from);
+
+        foreach ($this->from as $table) {
+
+            if ($table instanceof HasBindings) {
+                $this->mergeBindings($table);
+            }
+
+        }
+
+        return "FROM $from";
+
+    }
 
 }

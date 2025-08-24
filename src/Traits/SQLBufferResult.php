@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait SQLBufferResult
 {
+    protected string $sql_buffer_result = "";
 
-  protected string $sql_buffer_result = "";
+    public function sqlBufferResult(): static
+    {
 
-  public function sqlBufferResult(): static
-  {
+        $this->sql_buffer_result = "SQL_BUFFER_RESULT";
 
-    $this->sql_buffer_result = "SQL_BUFFER_RESULT";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

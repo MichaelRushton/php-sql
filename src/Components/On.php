@@ -11,36 +11,32 @@ use Stringable;
 
 class On implements HasBindings, Stringable
 {
+    use Bindings;
+    use TraitsOn;
 
-  use Bindings;
-  use TraitsOn;
-
-  public function __toString(): string
-  {
-
-    if (empty($this->on))
-    {
-      return "";
-    }
-
-    $this->bindings = [];
-
-    foreach ($this->on as [$prefix, $predicate])
+    public function __toString(): string
     {
 
-      $on[] = "$prefix$predicate";
+        if (empty($this->on)) {
+            return "";
+        }
 
-      if ($predicate instanceof HasBindings)
-      {
-        $this->mergeBindings($predicate);
-      }
+        $this->bindings = [];
+
+        foreach ($this->on as [$prefix, $predicate]) {
+
+            $on[] = "$prefix$predicate";
+
+            if ($predicate instanceof HasBindings) {
+                $this->mergeBindings($predicate);
+            }
+
+        }
+
+        $on = implode(" ", $on);
+
+        return 1 === count($this->on) ? $on : "($on)";
 
     }
-
-    $on = implode(" ", $on);
-
-    return 1 === count($this->on) ? $on : "($on)";
-
-  }
 
 }

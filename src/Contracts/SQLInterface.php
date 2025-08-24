@@ -11,13 +11,12 @@ use MichaelRushton\SQL\Contracts\Statements\UpdateInterface;
 
 interface SQLInterface
 {
+    public function delete(): DeleteInterface;
 
-  public function delete(): DeleteInterface;
+    public function insert(): InsertInterface;
 
-  public function insert(): InsertInterface;
+    public function select(): SelectInterface;
 
-  public function select(): SelectInterface;
-
-  public function update(): UpdateInterface;
+    public function update(): UpdateInterface;
 
 }

@@ -5,11 +5,10 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Insert;
 
-test("insert", function ()
-{
+test("insert", function () {
 
-  expect(
-    (string) $stmt = (new Insert(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Insert(SQL::SQLite))
     ->with("cte", "SELECT")
     ->orFail()
     ->into("t1")
@@ -18,22 +17,22 @@ test("insert", function ()
     ->select("SELECT")
     ->onConflictDoNothing()
     ->returning()
-  )
-  ->toBe(
-    implode(" ", [
-      "WITH cte AS (SELECT)",
-      "INSERT",
-      "OR FAIL",
-      "INTO t1",
-      "(c1)",
-      "VALUES (?)",
-      "SELECT",
-      "ON CONFLICT DO NOTHING",
-      "RETURNING *",
+    )
+    ->toBe(
+        implode(" ", [
+        "WITH cte AS (SELECT)",
+        "INSERT",
+        "OR FAIL",
+        "INTO t1",
+        "(c1)",
+        "VALUES (?)",
+        "SELECT",
+        "ON CONFLICT DO NOTHING",
+        "RETURNING *",
     ])
-  );
+    );
 
-  expect($stmt->bindings())
-  ->toBe([1]);
+    expect($stmt->bindings())
+    ->toBe([1]);
 
 });

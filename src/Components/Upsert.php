@@ -16,29 +16,28 @@ use Stringable;
 
 class Upsert implements UpsertInterface, HasBindings, Stringable
 {
+    use Bindings;
+    use Columns;
+    use OnConstraint;
+    use Set;
+    use Where;
+    use WhereIndex;
 
-  use Bindings;
-  use Columns;
-  use OnConstraint;
-  use Set;
-  use Where;
-  use WhereIndex;
+    public function __toString(): string
+    {
 
-  public function __toString(): string
-  {
+        $this->bindings = [];
 
-    $this->bindings = [];
+        return implode(" ", array_filter([
+          $this->getColumns(),
+          $this->getWhereIndex(),
+          $this->on_constraint,
+          "DO",
+          empty($this->set) ? "NOTHING" : "UPDATE",
+          $this->getSet(),
+          $this->getWhere(),
+        ], "strlen"));
 
-    return implode(" ", array_filter([
-      $this->getColumns(),
-      $this->getWhereIndex(),
-      $this->on_constraint,
-      "DO",
-      empty($this->set) ? "NOTHING" : "UPDATE",
-      $this->getSet(),
-      $this->getWhere(),
-    ], "strlen"));
-
-  }
+    }
 
 }

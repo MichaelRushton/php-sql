@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Any
 {
+    protected string $any = "";
 
-  protected string $any = "";
+    public function any(): static
+    {
 
-  public function any(): static
-  {
+        $this->any = "ANY";
 
-    $this->any = "ANY";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

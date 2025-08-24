@@ -4,14 +4,13 @@ declare(strict_types=1);
 
 use MichaelRushton\SQL\Components\Table;
 
-test("for portion of", function ($start, $end)
-{
+test("for portion of", function ($start, $end) {
 
-  expect(
-    (string) (new Table("t1"))
+    expect(
+        (string) (new Table("t1"))
     ->forPortionOf("date_period", $start, $end)
-  )
-  ->toBe("t1 FOR PORTION OF date_period FROM '2024-01-01 00:00:00' TO '2025-01-01 00:00:00'");
+    )
+    ->toBe("t1 FOR PORTION OF date_period FROM '2024-01-01 00:00:00' TO '2025-01-01 00:00:00'");
 
 })
 ->with([

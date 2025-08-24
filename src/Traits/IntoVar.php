@@ -6,33 +6,30 @@ namespace MichaelRushton\SQL\Traits;
 
 trait IntoVar
 {
+    protected array $into_var = [];
 
-  protected array $into_var = [];
-
-  public function intoVar(string|array $name): static
-  {
-
-    foreach ((array) $name as $n)
+    public function intoVar(string|array $name): static
     {
-      $this->into_var[] = "@$n";
+
+        foreach ((array) $name as $n) {
+            $this->into_var[] = "@$n";
+        }
+
+        return $this;
+
     }
 
-    return $this;
-
-  }
-
-  protected function getIntoVar(): string
-  {
-
-    if (empty($this->into_var))
+    protected function getIntoVar(): string
     {
-      return "";
+
+        if (empty($this->into_var)) {
+            return "";
+        }
+
+        $into_var = implode(", ", $this->into_var);
+
+        return "INTO $into_var";
+
     }
-
-    $into_var = implode(", ", $this->into_var);
-
-    return "INTO $into_var";
-
-  }
 
 }

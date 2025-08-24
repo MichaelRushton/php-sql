@@ -25,95 +25,93 @@ use MichaelRushton\SQL\Traits\With;
 
 class Update extends Statement implements UpdateInterface
 {
+    use From;
+    use Ignore;
+    use Join;
+    use Limit;
+    use LowPriority;
+    use OrderBy;
+    use OrOnConflict;
+    use Output;
+    use Returning;
+    use Set;
+    use Table;
+    use Top;
+    use Where;
+    use WhereCurrentOf;
+    use With;
 
-  use From;
-  use Ignore;
-  use Join;
-  use Limit;
-  use LowPriority;
-  use OrderBy;
-  use OrOnConflict;
-  use Output;
-  use Returning;
-  use Set;
-  use Table;
-  use Top;
-  use Where;
-  use WhereCurrentOf;
-  use With;
-
-  protected function toArray(): array
-  {
-
-    return match ($this->sql())
+    protected function toArray(): array
     {
 
-      SQL::MariaDB => [
-        "UPDATE",
-        $this->low_priority,
-        $this->ignore,
-        $this->getTable(),
-        $this->getJoin(),
-        $this->getSet(),
-        $this->getWhere(),
-        $this->getOrderBy(),
-        $this->getLimit(),
-      ],
+        return match ($this->sql()) {
 
-      SQL::MySQL => [
-        $this->getWith(),
-        "UPDATE",
-        $this->low_priority,
-        $this->ignore,
-        $this->getTable(),
-        $this->getJoin(),
-        $this->getSet(),
-        $this->getWhere(),
-        $this->getOrderBy(),
-        $this->getLimit(),
-      ],
+            SQL::MariaDB => [
+              "UPDATE",
+              $this->low_priority,
+              $this->ignore,
+              $this->getTable(),
+              $this->getJoin(),
+              $this->getSet(),
+              $this->getWhere(),
+              $this->getOrderBy(),
+              $this->getLimit(),
+            ],
 
-      SQL::PostgreSQL => [
-        $this->getWith(),
-        "UPDATE",
-        $this->getTable(),
-        $this->getSet(),
-        $this->getFrom(),
-        $this->getJoin(),
-        $this->getWhere(),
-        $this->where_current_of,
-        $this->getReturning(),
-      ],
+            SQL::MySQL => [
+              $this->getWith(),
+              "UPDATE",
+              $this->low_priority,
+              $this->ignore,
+              $this->getTable(),
+              $this->getJoin(),
+              $this->getSet(),
+              $this->getWhere(),
+              $this->getOrderBy(),
+              $this->getLimit(),
+            ],
 
-      SQL::SQLite => [
-        $this->getWith(),
-        "UPDATE",
-        $this->or,
-        $this->getTable(),
-        $this->getSet(),
-        $this->getFrom(),
-        $this->getJoin(),
-        $this->getWhere(),
-        $this->getReturning(),
-        $this->getOrderBy(),
-        $this->getLimit(),
-      ],
+            SQL::PostgreSQL => [
+              $this->getWith(),
+              "UPDATE",
+              $this->getTable(),
+              $this->getSet(),
+              $this->getFrom(),
+              $this->getJoin(),
+              $this->getWhere(),
+              $this->where_current_of,
+              $this->getReturning(),
+            ],
 
-      SQL::TransactSQL => [
-        $this->getWith(),
-        "UPDATE",
-        $this->getTop(),
-        $this->getTable(),
-        $this->getSet(),
-        $this->getOutput(),
-        $this->getFrom(),
-        $this->getJoin(),
-        $this->getWhere(),
-        $this->where_current_of,
-      ],
+            SQL::SQLite => [
+              $this->getWith(),
+              "UPDATE",
+              $this->or,
+              $this->getTable(),
+              $this->getSet(),
+              $this->getFrom(),
+              $this->getJoin(),
+              $this->getWhere(),
+              $this->getReturning(),
+              $this->getOrderBy(),
+              $this->getLimit(),
+            ],
 
-    };
+            SQL::TransactSQL => [
+              $this->getWith(),
+              "UPDATE",
+              $this->getTop(),
+              $this->getTable(),
+              $this->getSet(),
+              $this->getOutput(),
+              $this->getFrom(),
+              $this->getJoin(),
+              $this->getWhere(),
+              $this->where_current_of,
+            ],
 
-  }
+        };
+
+    }
 
 }

@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Quick
 {
+    protected string $quick = "";
 
-  protected string $quick = "";
+    public function quick(): static
+    {
 
-  public function quick(): static
-  {
+        $this->quick = "QUICK";
 
-    $this->quick = "QUICK";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

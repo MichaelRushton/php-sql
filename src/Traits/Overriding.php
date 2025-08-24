@@ -6,25 +6,24 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Overriding
 {
+    protected string $overriding = "";
 
-  protected string $overriding = "";
+    public function overridingSystemValue(): static
+    {
 
-  public function overridingSystemValue(): static
-  {
+        $this->overriding = "OVERRIDING SYSTEM VALUE";
 
-    $this->overriding = "OVERRIDING SYSTEM VALUE";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function overridingUserValue(): static
+    {
 
-  public function overridingUserValue(): static
-  {
+        $this->overriding = "OVERRIDING USER VALUE";
 
-    $this->overriding = "OVERRIDING USER VALUE";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

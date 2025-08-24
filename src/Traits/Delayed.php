@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Delayed
 {
+    protected string $delayed = "";
 
-  protected string $delayed = "";
+    public function delayed(): static
+    {
 
-  public function delayed(): static
-  {
+        $this->delayed = "DELAYED";
 
-    $this->delayed = "DELAYED";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

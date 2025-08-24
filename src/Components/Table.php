@@ -14,27 +14,28 @@ use Stringable;
 
 class Table implements TableInterface, Stringable
 {
+    use Alias;
+    use ForPortionOf;
+    use IndexHint;
+    use Only;
+    use Partition;
 
-  use Alias;
-  use ForPortionOf;
-  use IndexHint;
-  use Only;
-  use Partition;
+    public function __construct(public readonly string $name)
+    {
+    }
 
-  public function __construct(public readonly string $name) {}
+    public function __toString(): string
+    {
 
-  public function __toString(): string
-  {
+        return implode(" ", array_filter([
+          $this->only,
+          $this->name,
+          $this->getPartition(),
+          $this->for_portion_of,
+          $this->alias,
+          $this->getIndexHint(),
+        ]));
 
-    return implode(" ", array_filter([
-      $this->only,
-      $this->name,
-      $this->getPartition(),
-      $this->for_portion_of,
-      $this->alias,
-      $this->getIndexHint(),
-    ]));
-
-  }
+    }
 
 }

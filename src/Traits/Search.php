@@ -6,38 +6,34 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Search
 {
+    protected string $search = "";
 
-  protected string $search = "";
+    protected function search(
+        string $search,
+        string|array $first_by,
+        string $set
+    ): static {
 
-  protected function search(
-    string $search,
-    string|array $first_by,
-    string $set
-  ): static
-  {
+        $columns = implode(", ", (array) $first_by);
 
-    $columns = implode(", ", (array) $first_by);
+        $this->search = "SEARCH $search FIRST BY $columns SET $set";
 
-    $this->search = "SEARCH $search FIRST BY $columns SET $set";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function searchBreadth(
+        string|array $first_by,
+        string $set
+    ): static {
+        return $this->search("BREADTH", $first_by, $set);
+    }
 
-  public function searchBreadth(
-    string|array $first_by,
-    string $set
-  ): static
-  {
-    return $this->search("BREADTH", $first_by, $set);
-  }
-
-  public function searchDepth(
-    string|array $first_by,
-    string $set
-  ): static
-  {
-    return $this->search("DEPTH", $first_by, $set);
-  }
+    public function searchDepth(
+        string|array $first_by,
+        string $set
+    ): static {
+        return $this->search("DEPTH", $first_by, $set);
+    }
 
 }

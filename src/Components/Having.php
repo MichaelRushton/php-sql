@@ -11,36 +11,32 @@ use Stringable;
 
 class Having implements HasBindings, Stringable
 {
+    use Bindings;
+    use TraitsHaving;
 
-  use Bindings;
-  use TraitsHaving;
-
-  public function __toString(): string
-  {
-
-    if (empty($this->having))
-    {
-      return "";
-    }
-
-    $this->bindings = [];
-
-    foreach ($this->having as [$prefix, $predicate])
+    public function __toString(): string
     {
 
-      $having[] = "$prefix$predicate";
+        if (empty($this->having)) {
+            return "";
+        }
 
-      if ($predicate instanceof HasBindings)
-      {
-        $this->mergeBindings($predicate);
-      }
+        $this->bindings = [];
+
+        foreach ($this->having as [$prefix, $predicate]) {
+
+            $having[] = "$prefix$predicate";
+
+            if ($predicate instanceof HasBindings) {
+                $this->mergeBindings($predicate);
+            }
+
+        }
+
+        $having = implode(" ", $having);
+
+        return 1 === count($this->having) ? $having : "($having)";
 
     }
-
-    $having = implode(" ", $having);
-
-    return 1 === count($this->having) ? $having : "($having)";
-
-  }
 
 }

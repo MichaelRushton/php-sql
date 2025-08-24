@@ -28,108 +28,106 @@ use MichaelRushton\SQL\Traits\With;
 
 class Insert extends Statement implements InsertInterface
 {
+    use Columns;
+    use Delayed;
+    use HighPriority;
+    use Ignore;
+    use Into;
+    use LowPriority;
+    use OnConflict;
+    use OnDuplicateKeyUpdate;
+    use OrOnConflict;
+    use Output;
+    use Overriding;
+    use Returning;
+    use RowAlias;
+    use Select;
+    use Set;
+    use Top;
+    use Values;
+    use With;
 
-  use Columns;
-  use Delayed;
-  use HighPriority;
-  use Ignore;
-  use Into;
-  use LowPriority;
-  use OnConflict;
-  use OnDuplicateKeyUpdate;
-  use OrOnConflict;
-  use Output;
-  use Overriding;
-  use Returning;
-  use RowAlias;
-  use Select;
-  use Set;
-  use Top;
-  use Values;
-  use With;
-
-  protected function toArray(): array
-  {
-
-    return match ($this->sql())
+    protected function toArray(): array
     {
 
-      SQL::MariaDB => [
-        "INSERT",
-        $this->low_priority,
-        $this->delayed,
-        $this->high_priority,
-        $this->ignore,
-        $this->into,
-        $this->getColumns(),
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSet(),
-          $this->getSelect(),
-        ], "strlen")) ?: "VALUES ()",
-        $this->getOnDuplicateKeyUpdate(),
-        $this->getReturning(),
-      ],
+        return match ($this->sql()) {
 
-      SQL::MySQL => [
-        "INSERT",
-        $this->low_priority,
-        $this->high_priority,
-        $this->ignore,
-        $this->into,
-        $this->getColumns(),
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSet(),
-          $this->getSelect(),
-        ], "strlen")) ?: "VALUES ()",
-        $this->row_alias,
-        $this->getOnDuplicateKeyUpdate(),
-      ],
+            SQL::MariaDB => [
+              "INSERT",
+              $this->low_priority,
+              $this->delayed,
+              $this->high_priority,
+              $this->ignore,
+              $this->into,
+              $this->getColumns(),
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSet(),
+                $this->getSelect(),
+              ], "strlen")) ?: "VALUES ()",
+              $this->getOnDuplicateKeyUpdate(),
+              $this->getReturning(),
+            ],
 
-      SQL::PostgreSQL => [
-        $this->getWith(),
-        "INSERT",
-        $this->into,
-        $this->getColumns(),
-        $this->overriding,
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSelect(),
-        ], "strlen")) ?: "DEFAULT VALUES",
-        $this->getOnConflict(),
-        $this->getReturning(),
-      ],
+            SQL::MySQL => [
+              "INSERT",
+              $this->low_priority,
+              $this->high_priority,
+              $this->ignore,
+              $this->into,
+              $this->getColumns(),
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSet(),
+                $this->getSelect(),
+              ], "strlen")) ?: "VALUES ()",
+              $this->row_alias,
+              $this->getOnDuplicateKeyUpdate(),
+            ],
 
-      SQL::SQLite => [
-        $this->getWith(),
-        "INSERT",
-        $this->or,
-        $this->into,
-        $this->getColumns(),
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSelect(),
-        ], "strlen")) ?: "DEFAULT VALUES",
-        $this->getOnConflict(),
-        $this->getReturning(),
-      ],
+            SQL::PostgreSQL => [
+              $this->getWith(),
+              "INSERT",
+              $this->into,
+              $this->getColumns(),
+              $this->overriding,
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSelect(),
+              ], "strlen")) ?: "DEFAULT VALUES",
+              $this->getOnConflict(),
+              $this->getReturning(),
+            ],
 
-      SQL::TransactSQL => [
-        $this->getWith(),
-        "INSERT",
-        $this->getTop(),
-        $this->into,
-        $this->getColumns(),
-        $this->getOutput(),
-        implode(" ", array_filter([
-          $this->getValues(),
-          $this->getSelect(),
-        ], "strlen")) ?: "DEFAULT VALUES",
-      ],
+            SQL::SQLite => [
+              $this->getWith(),
+              "INSERT",
+              $this->or,
+              $this->into,
+              $this->getColumns(),
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSelect(),
+              ], "strlen")) ?: "DEFAULT VALUES",
+              $this->getOnConflict(),
+              $this->getReturning(),
+            ],
 
-    };
+            SQL::TransactSQL => [
+              $this->getWith(),
+              "INSERT",
+              $this->getTop(),
+              $this->into,
+              $this->getColumns(),
+              $this->getOutput(),
+              implode(" ", array_filter([
+                $this->getValues(),
+                $this->getSelect(),
+              ], "strlen")) ?: "DEFAULT VALUES",
+            ],
 
-  }
+        };
+
+    }
 
 }

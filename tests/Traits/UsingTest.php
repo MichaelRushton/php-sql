@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Delete;
 
-test("table", function ($table, $expected, $bindings = [])
-{
+test("table", function ($table, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Delete(SQL::MariaDB))
+    expect(
+        (string) $stmt = (new Delete(SQL::MariaDB))
     ->using($table)
-  )
-  ->toBe("DELETE USING $expected");
+    )
+    ->toBe("DELETE USING $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

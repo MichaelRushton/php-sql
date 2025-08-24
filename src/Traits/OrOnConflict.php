@@ -6,43 +6,42 @@ namespace MichaelRushton\SQL\Traits;
 
 trait OrOnConflict
 {
+    protected string $or = "";
 
-  protected string $or = "";
+    public function orFail(): static
+    {
 
-  public function orFail(): static
-  {
+        $this->or = "OR FAIL";
 
-    $this->or = "OR FAIL";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function orIgnore(): static
+    {
 
-  public function orIgnore(): static
-  {
+        $this->or = "OR IGNORE";
 
-    $this->or = "OR IGNORE";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function orReplace(): static
+    {
 
-  public function orReplace(): static
-  {
+        $this->or = "OR REPLACE";
 
-    $this->or = "OR REPLACE";
+        return $this;
 
-    return $this;
+    }
 
-  }
+    public function orRollBack(): static
+    {
 
-  public function orRollBack(): static
-  {
+        $this->or = "OR ROLLBACK";
 
-    $this->or = "OR ROLLBACK";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

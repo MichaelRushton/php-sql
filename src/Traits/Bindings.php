@@ -8,22 +8,20 @@ use MichaelRushton\SQL\Contracts\Traits\HasBindings;
 
 trait Bindings
 {
+    protected array $bindings = [];
 
-  protected array $bindings = [];
-
-  public function bindings(): array
-  {
-    return $this->bindings;
-  }
-
-  public function mergeBindings(HasBindings $from): void
-  {
-
-    foreach ($from->bindings() as $value)
+    public function bindings(): array
     {
-      $this->bindings[] = $value;
+        return $this->bindings;
     }
 
-  }
+    public function mergeBindings(HasBindings $from): void
+    {
+
+        foreach ($from->bindings() as $value) {
+            $this->bindings[] = $value;
+        }
+
+    }
 
 }

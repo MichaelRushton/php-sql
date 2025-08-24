@@ -5,11 +5,10 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Update;
 
-test("update", function ()
-{
+test("update", function () {
 
-  expect(
-    (string) (new Update(SQL::MySQL))
+    expect(
+        (string) (new Update(SQL::MySQL))
     ->with("cte", "SELECT")
     ->lowPriority()
     ->ignore()
@@ -19,18 +18,18 @@ test("update", function ()
     ->where("c1")
     ->orderBy("c1")
     ->limit(1)
-  )
-  ->toBe(implode(" ", [
-    "WITH cte AS (SELECT)",
-    "UPDATE",
-    "LOW_PRIORITY",
-    "IGNORE",
-    "t1",
-    "JOIN t1",
-    "SET c1 = ?",
-    "WHERE c1",
-    "ORDER BY c1",
-    "LIMIT 1",
-  ]));
+    )
+    ->toBe(implode(" ", [
+      "WITH cte AS (SELECT)",
+      "UPDATE",
+      "LOW_PRIORITY",
+      "IGNORE",
+      "t1",
+      "JOIN t1",
+      "SET c1 = ?",
+      "WHERE c1",
+      "ORDER BY c1",
+      "LIMIT 1",
+    ]));
 
 });

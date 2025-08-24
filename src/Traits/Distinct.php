@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Distinct
 {
+    protected string $distinct = "";
 
-  protected string $distinct = "";
+    public function distinct(): static
+    {
 
-  public function distinct(): static
-  {
+        $this->distinct = "DISTINCT";
 
-    $this->distinct = "DISTINCT";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

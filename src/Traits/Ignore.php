@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Ignore
 {
+    protected string $ignore = "";
 
-  protected string $ignore = "";
+    public function ignore(): static
+    {
 
-  public function ignore(): static
-  {
+        $this->ignore = "IGNORE";
 
-    $this->ignore = "IGNORE";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

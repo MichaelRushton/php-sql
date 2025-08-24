@@ -6,33 +6,30 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Partition
 {
+    protected array $partitions = [];
 
-  protected array $partitions = [];
-
-  public function partition(string|array $partitions): static
-  {
-
-    foreach ((array) $partitions as $partition)
+    public function partition(string|array $partitions): static
     {
-      $this->partitions[] = $partition;
+
+        foreach ((array) $partitions as $partition) {
+            $this->partitions[] = $partition;
+        }
+
+        return $this;
+
     }
 
-    return $this;
-
-  }
-
-  protected function getPartition(): string
-  {
-
-    if (empty($this->partitions))
+    protected function getPartition(): string
     {
-      return "";
+
+        if (empty($this->partitions)) {
+            return "";
+        }
+
+        $partitions = implode(", ", $this->partitions);
+
+        return "PARTITION ($partitions)";
+
     }
-
-    $partitions = implode(", ", $this->partitions);
-
-    return "PARTITION ($partitions)";
-
-  }
 
 }

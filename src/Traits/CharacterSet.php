@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait CharacterSet
 {
+    protected string $character_set = "";
 
-  protected string $character_set = "";
+    public function characterSet(string $name): static
+    {
 
-  public function characterSet(string $name): static
-  {
+        $this->character_set = "CHARACTER SET $name";
 
-    $this->character_set = "CHARACTER SET $name";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

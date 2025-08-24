@@ -5,84 +5,78 @@ declare(strict_types=1);
 use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\Components\Window;
 
-test("range", function ()
-{
+test("range", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->range()
-  )
-  ->toBe("w AS (RANGE)");
+    )
+    ->toBe("w AS (RANGE)");
 
 });
 
-test("rows", function ()
-{
+test("rows", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->rows()
-  )
-  ->toBe("w AS (ROWS)");
+    )
+    ->toBe("w AS (ROWS)");
 
 });
 
-test("groups", function ()
-{
+test("groups", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->groups()
-  )
-  ->toBe("w AS (GROUPS)");
+    )
+    ->toBe("w AS (GROUPS)");
 
 });
 
-test("current row", function ()
-{
+test("current row", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->currentRow()
-  )
-  ->toBe("w AS (CURRENT ROW)");
+    )
+    ->toBe("w AS (CURRENT ROW)");
 
 });
 
-test("unbounded preceding", function ()
-{
+test("unbounded preceding", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->unboundedPreceding()
-  )
-  ->toBe("w AS (UNBOUNDED PRECEDING)");
+    )
+    ->toBe("w AS (UNBOUNDED PRECEDING)");
 
 });
 
-test("unbounded following", function ()
-{
+test("unbounded following", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->unboundedFollowing()
-  )
-  ->toBe("w AS (UNBOUNDED FOLLOWING)");
+    )
+    ->toBe("w AS (UNBOUNDED FOLLOWING)");
 
 });
 
-test("preceding", function ($expression, $expected, $bindings = [])
-{
+test("preceding", function ($expression, $expected, $bindings = []) {
 
-  expect(
-    (string) $window = (new Window("w"))
+    expect(
+        (string) $window = (new Window("w"))
     ->preceding($expression)
-  )
-  ->toBe("w AS ($expected PRECEDING)");
+    )
+    ->toBe("w AS ($expected PRECEDING)");
 
-  expect($window->bindings()
-  )
-  ->toBe($bindings);
+    expect(
+        $window->bindings()
+    )
+    ->toBe($bindings);
 
 })
 ->with([
@@ -91,18 +85,18 @@ test("preceding", function ($expression, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("following", function ($expression, $expected, $bindings = [])
-{
+test("following", function ($expression, $expected, $bindings = []) {
 
-  expect(
-    (string) $window = (new Window("w"))
+    expect(
+        (string) $window = (new Window("w"))
     ->following($expression)
-  )
-  ->toBe("w AS ($expected FOLLOWING)");
+    )
+    ->toBe("w AS ($expected FOLLOWING)");
 
-  expect($window->bindings()
-  )
-  ->toBe($bindings);
+    expect(
+        $window->bindings()
+    )
+    ->toBe($bindings);
 
 })
 ->with([
@@ -111,51 +105,48 @@ test("following", function ($expression, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("between current row", function ()
-{
+test("between current row", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->betweenCurrentRow()
-  )
-  ->toBe("w AS (BETWEEN CURRENT ROW)");
+    )
+    ->toBe("w AS (BETWEEN CURRENT ROW)");
 
 });
 
-test("between unbounded preceding", function ()
-{
+test("between unbounded preceding", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->betweenUnboundedPreceding()
-  )
-  ->toBe("w AS (BETWEEN UNBOUNDED PRECEDING)");
+    )
+    ->toBe("w AS (BETWEEN UNBOUNDED PRECEDING)");
 
 });
 
-test("between unbounded following", function ()
-{
+test("between unbounded following", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->betweenUnboundedFollowing()
-  )
-  ->toBe("w AS (BETWEEN UNBOUNDED FOLLOWING)");
+    )
+    ->toBe("w AS (BETWEEN UNBOUNDED FOLLOWING)");
 
 });
 
-test("between preceding", function ($expression, $expected, $bindings = [])
-{
+test("between preceding", function ($expression, $expected, $bindings = []) {
 
-  expect(
-    (string) $window = (new Window("w"))
+    expect(
+        (string) $window = (new Window("w"))
     ->betweenPreceding($expression)
-  )
-  ->toBe("w AS (BETWEEN $expected PRECEDING)");
+    )
+    ->toBe("w AS (BETWEEN $expected PRECEDING)");
 
-  expect($window->bindings()
-  )
-  ->toBe($bindings);
+    expect(
+        $window->bindings()
+    )
+    ->toBe($bindings);
 
 })
 ->with([
@@ -164,18 +155,18 @@ test("between preceding", function ($expression, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("between following", function ($expression, $expected, $bindings = [])
-{
+test("between following", function ($expression, $expected, $bindings = []) {
 
-  expect(
-    (string) $window = (new Window("w"))
+    expect(
+        (string) $window = (new Window("w"))
     ->betweenFollowing($expression)
-  )
-  ->toBe("w AS (BETWEEN $expected FOLLOWING)");
+    )
+    ->toBe("w AS (BETWEEN $expected FOLLOWING)");
 
-  expect($window->bindings()
-  )
-  ->toBe($bindings);
+    expect(
+        $window->bindings()
+    )
+    ->toBe($bindings);
 
 })
 ->with([
@@ -184,51 +175,48 @@ test("between following", function ($expression, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("and current row", function ()
-{
+test("and current row", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->andCurrentRow()
-  )
-  ->toBe("w AS (AND CURRENT ROW)");
+    )
+    ->toBe("w AS (AND CURRENT ROW)");
 
 });
 
-test("and unbounded preceding", function ()
-{
+test("and unbounded preceding", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->andUnboundedPreceding()
-  )
-  ->toBe("w AS (AND UNBOUNDED PRECEDING)");
+    )
+    ->toBe("w AS (AND UNBOUNDED PRECEDING)");
 
 });
 
-test("and unbounded following", function ()
-{
+test("and unbounded following", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->andUnboundedFollowing()
-  )
-  ->toBe("w AS (AND UNBOUNDED FOLLOWING)");
+    )
+    ->toBe("w AS (AND UNBOUNDED FOLLOWING)");
 
 });
 
-test("and preceding", function ($expression, $expected, $bindings = [])
-{
+test("and preceding", function ($expression, $expected, $bindings = []) {
 
-  expect(
-    (string) $window = (new Window("w"))
+    expect(
+        (string) $window = (new Window("w"))
     ->andPreceding($expression)
-  )
-  ->toBe("w AS (AND $expected PRECEDING)");
+    )
+    ->toBe("w AS (AND $expected PRECEDING)");
 
-  expect($window->bindings()
-  )
-  ->toBe($bindings);
+    expect(
+        $window->bindings()
+    )
+    ->toBe($bindings);
 
 })
 ->with([
@@ -237,18 +225,18 @@ test("and preceding", function ($expression, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("and following", function ($expression, $expected, $bindings = [])
-{
+test("and following", function ($expression, $expected, $bindings = []) {
 
-  expect(
-    (string) $window = (new Window("w"))
+    expect(
+        (string) $window = (new Window("w"))
     ->andFollowing($expression)
-  )
-  ->toBe("w AS (AND $expected FOLLOWING)");
+    )
+    ->toBe("w AS (AND $expected FOLLOWING)");
 
-  expect($window->bindings()
-  )
-  ->toBe($bindings);
+    expect(
+        $window->bindings()
+    )
+    ->toBe($bindings);
 
 })
 ->with([
@@ -257,61 +245,55 @@ test("and following", function ($expression, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("exclude current row", function ()
-{
+test("exclude current row", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->excludeCurrentRow()
-  )
-  ->toBe("w AS (EXCLUDE CURRENT ROW)");
+    )
+    ->toBe("w AS (EXCLUDE CURRENT ROW)");
 
 });
 
-test("exclude group", function ()
-{
+test("exclude group", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->excludeGroup()
-  )
-  ->toBe("w AS (EXCLUDE GROUP)");
+    )
+    ->toBe("w AS (EXCLUDE GROUP)");
 
 });
 
-test("exclude no others", function ()
-{
+test("exclude no others", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->excludeNoOthers()
-  )
-  ->toBe("w AS (EXCLUDE NO OTHERS)");
+    )
+    ->toBe("w AS (EXCLUDE NO OTHERS)");
 
 });
 
-test("exclude ties", function ()
-{
+test("exclude ties", function () {
 
-  expect(
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->excludeTies()
-  )
-  ->toBe("w AS (EXCLUDE TIES)");
+    )
+    ->toBe("w AS (EXCLUDE TIES)");
 
 });
 
-test("frame spec", function ()
-{
+test("frame spec", function () {
 
-  expect(
-
-    (string) (new Window("w"))
+    expect(
+        (string) (new Window("w"))
     ->range()
     ->betweenCurrentRow()
     ->andCurrentRow()
     ->excludeCurrentRow()
-  )
-  ->toBe("w AS (RANGE BETWEEN CURRENT ROW AND CURRENT ROW EXCLUDE CURRENT ROW)");
+    )
+    ->toBe("w AS (RANGE BETWEEN CURRENT ROW AND CURRENT ROW EXCLUDE CURRENT ROW)");
 
 });

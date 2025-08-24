@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Exists
 {
+    protected string $exists = "";
 
-  protected string $exists = "";
+    public function exists(): static
+    {
 
-  public function exists(): static
-  {
+        $this->exists = "EXISTS";
 
-    $this->exists = "EXISTS";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

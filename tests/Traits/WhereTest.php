@@ -7,25 +7,23 @@ use MichaelRushton\SQL\Components\Where;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("empty where", function ()
-{
+test("empty where", function () {
 
-  expect((string) new Where)
-  ->toBe("");
+    expect((string) new Where())
+    ->toBe("");
 
 });
 
-test("where single column", function ($column, $expected, $bindings = [])
-{
+test("where single column", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where($column)
-  )
-  ->toBe($expected);
+    )
+    ->toBe($expected);
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -38,17 +36,16 @@ test("where single column", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "(c1 = ? AND c2 = ?)", ["test", 1]],
 ]);
 
-test("where implicit operator", function ($value, $expected, $bindings = [])
-{
+test("where implicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c1", $value)
-  )
-  ->toBe("c1 $expected");
+    )
+    ->toBe("c1 $expected");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -61,17 +58,16 @@ test("where implicit operator", function ($value, $expected, $bindings = [])
   [new Select(SQL::SQLite), "= (SELECT *)"],
 ]);
 
-test("where explicit operator", function ($value, $expected, $bindings = [])
-{
+test("where explicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c1", "!=", $value)
-  )
-  ->toBe("c1 != $expected");
+    )
+    ->toBe("c1 != $expected");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -84,20 +80,18 @@ test("where explicit operator", function ($value, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where callback", function ($column, $expected, $bindings = [])
-{
+test("where callback", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
-    ->where(function () use ($column)
-    {
-      $this->where($column);
+    expect(
+        (string) ($where = new Where())
+    ->where(function () use ($column) {
+        $this->where($column);
     })
-  )
-  ->toBe($expected);
+    )
+    ->toBe($expected);
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -110,18 +104,17 @@ test("where callback", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "(c1 = ? AND c2 = ?)", ["test", 1]],
 ]);
 
-test("or where single column", function ($column, $expected, $bindings = [])
-{
+test("or where single column", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhere($column)
-  )
-  ->toBe("(c0 OR $expected)");
+    )
+    ->toBe("(c0 OR $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -134,18 +127,17 @@ test("or where single column", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "c1 = ? OR c2 = ?", ["test", 1]],
 ]);
 
-test("or where implicit operator", function ($value, $expected, $bindings = [])
-{
+test("or where implicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhere("c1", $value)
-  )
-  ->toBe("(c0 OR c1 $expected)");
+    )
+    ->toBe("(c0 OR c1 $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -158,18 +150,17 @@ test("or where implicit operator", function ($value, $expected, $bindings = [])
   [new Select(SQL::SQLite), "= (SELECT *)"],
 ]);
 
-test("or where explicit operator", function ($value, $expected, $bindings = [])
-{
+test("or where explicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhere("c1", "!=", $value)
-  )
-  ->toBe("(c0 OR c1 != $expected)");
+    )
+    ->toBe("(c0 OR c1 != $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -182,21 +173,19 @@ test("or where explicit operator", function ($value, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where callback", function ($column, $expected, $bindings = [])
-{
+test("or where callback", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
-    ->orWhere(function ($where) use ($column)
-    {
-      $where->where($column);
+    ->orWhere(function ($where) use ($column) {
+        $where->where($column);
     })
-  )
-  ->toBe("(c0 OR $expected)");
+    )
+    ->toBe("(c0 OR $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -209,17 +198,16 @@ test("or where callback", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "(c1 = ? AND c2 = ?)", ["test", 1]],
 ]);
 
-test("where not single column", function ($column, $expected, $bindings = [])
-{
+test("where not single column", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereNot($column)
-  )
-  ->toBe($expected);
+    )
+    ->toBe($expected);
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -232,17 +220,16 @@ test("where not single column", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "(NOT c1 = ? AND NOT c2 = ?)", ["test", 1]],
 ]);
 
-test("where not implicit operator", function ($value, $expected, $bindings = [])
-{
+test("where not implicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereNot("c1", $value)
-  )
-  ->toBe("NOT c1 $expected");
+    )
+    ->toBe("NOT c1 $expected");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -255,17 +242,16 @@ test("where not implicit operator", function ($value, $expected, $bindings = [])
   [new Select(SQL::SQLite), "= (SELECT *)"],
 ]);
 
-test("where not explicit operator", function ($value, $expected, $bindings = [])
-{
+test("where not explicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereNot("c1", "!=", $value)
-  )
-  ->toBe("NOT c1 != $expected");
+    )
+    ->toBe("NOT c1 != $expected");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -278,20 +264,18 @@ test("where not explicit operator", function ($value, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where not callback", function ($column, $expected, $bindings = [])
-{
+test("where not callback", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
-    ->whereNot(function () use ($column)
-    {
-      $this->where($column);
+    expect(
+        (string) ($where = new Where())
+    ->whereNot(function () use ($column) {
+        $this->where($column);
     })
-  )
-  ->toBe("NOT $expected");
+    )
+    ->toBe("NOT $expected");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -304,18 +288,17 @@ test("where not callback", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "(c1 = ? AND c2 = ?)", ["test", 1]],
 ]);
 
-test("or where not single column", function ($column, $expected, $bindings = [])
-{
+test("or where not single column", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereNot($column)
-  )
-  ->toBe("(c0 OR NOT $expected)");
+    )
+    ->toBe("(c0 OR NOT $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -328,18 +311,17 @@ test("or where not single column", function ($column, $expected, $bindings = [])
   [["c1" => "test", "c2" => 1], "c1 = ? OR NOT c2 = ?", ["test", 1]],
 ]);
 
-test("or where not implicit operator", function ($value, $expected, $bindings = [])
-{
+test("or where not implicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereNot("c1", $value)
-  )
-  ->toBe("(c0 OR NOT c1 $expected)");
+    )
+    ->toBe("(c0 OR NOT c1 $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -352,18 +334,17 @@ test("or where not implicit operator", function ($value, $expected, $bindings = 
   [new Select(SQL::SQLite), "= (SELECT *)"],
 ]);
 
-test("or where not explicit operator", function ($value, $expected, $bindings = [])
-{
+test("or where not explicit operator", function ($value, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereNot("c1", "!=", $value)
-  )
-  ->toBe("(c0 OR NOT c1 != $expected)");
+    )
+    ->toBe("(c0 OR NOT c1 != $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -376,21 +357,19 @@ test("or where not explicit operator", function ($value, $expected, $bindings = 
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where not callback", function ($column, $expected, $bindings = [])
-{
+test("or where not callback", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
-    ->orWhereNot(function ($where) use ($column)
-    {
-      $where->where($column);
+    ->orWhereNot(function ($where) use ($column) {
+        $where->where($column);
     })
-  )
-  ->toBe("(c0 OR NOT $expected)");
+    )
+    ->toBe("(c0 OR NOT $expected)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -403,17 +382,16 @@ test("or where not callback", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where in", function ($column, $expected, $bindings = [])
-{
+test("where in", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereIn($column, ["test", 1])
-  )
-  ->toBe("$expected IN (?, ?)");
+    )
+    ->toBe("$expected IN (?, ?)");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -425,18 +403,17 @@ test("where in", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where in", function ($column, $expected, $bindings = [])
-{
+test("or where in", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereIn($column, ["test", 1])
-  )
-  ->toBe("(c0 OR $expected IN (?, ?))");
+    )
+    ->toBe("(c0 OR $expected IN (?, ?))");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -448,17 +425,16 @@ test("or where in", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where not in", function ($column, $expected, $bindings = [])
-{
+test("where not in", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereNotIn($column, ["test", 1])
-  )
-  ->toBe("NOT $expected IN (?, ?)");
+    )
+    ->toBe("NOT $expected IN (?, ?)");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -470,18 +446,17 @@ test("where not in", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where not in", function ($column, $expected, $bindings = [])
-{
+test("or where not in", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereNotIn($column, ["test", 1])
-  )
-  ->toBe("(c0 OR NOT $expected IN (?, ?))");
+    )
+    ->toBe("(c0 OR NOT $expected IN (?, ?))");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -493,17 +468,16 @@ test("or where not in", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where between", function ($column, $expected, $bindings = [])
-{
+test("where between", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereBetween($column, "test", 1)
-  )
-  ->toBe("$expected BETWEEN ? AND ?");
+    )
+    ->toBe("$expected BETWEEN ? AND ?");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -514,18 +488,17 @@ test("where between", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where between", function ($column, $expected, $bindings = [])
-{
+test("or where between", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereBetween($column, "test", 1)
-  )
-  ->toBe("(c0 OR $expected BETWEEN ? AND ?)");
+    )
+    ->toBe("(c0 OR $expected BETWEEN ? AND ?)");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -536,17 +509,16 @@ test("or where between", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where not between", function ($column, $expected, $bindings = [])
-{
+test("where not between", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereNotBetween($column, "test", 1)
-  )
-  ->toBe("NOT $expected BETWEEN ? AND ?");
+    )
+    ->toBe("NOT $expected BETWEEN ? AND ?");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -557,18 +529,17 @@ test("where not between", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where not between", function ($column, $expected, $bindings = [])
-{
+test("or where not between", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereNotBetween($column, "test", 1)
-  )
-  ->toBe("(c0 OR NOT $expected BETWEEN ? AND ?)");
+    )
+    ->toBe("(c0 OR NOT $expected BETWEEN ? AND ?)");
 
-  expect($where->bindings())
-  ->toBe(array_merge($bindings, ["test", 1]));
+    expect($where->bindings())
+    ->toBe(array_merge($bindings, ["test", 1]));
 
 })
 ->with([
@@ -579,17 +550,16 @@ test("or where not between", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where null", function ($column, $expected, $bindings = [])
-{
+test("where null", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereNull($column)
-  )
-  ->toBe("$expected IS NULL");
+    )
+    ->toBe("$expected IS NULL");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -598,18 +568,17 @@ test("where null", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where null", function ($column, $expected, $bindings = [])
-{
+test("or where null", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereNull($column)
-  )
-  ->toBe("(c0 OR $expected IS NULL)");
+    )
+    ->toBe("(c0 OR $expected IS NULL)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -618,17 +587,16 @@ test("or where null", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("where not null", function ($column, $expected, $bindings = [])
-{
+test("where not null", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->whereNotNull($column)
-  )
-  ->toBe("NOT $expected IS NULL");
+    )
+    ->toBe("NOT $expected IS NULL");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -637,18 +605,17 @@ test("where not null", function ($column, $expected, $bindings = [])
   [new Select(SQL::SQLite), "(SELECT *)"],
 ]);
 
-test("or where not null", function ($column, $expected, $bindings = [])
-{
+test("or where not null", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) ($where = new Where)
+    expect(
+        (string) ($where = new Where())
     ->where("c0")
     ->orWhereNotNull($column)
-  )
-  ->toBe("(c0 OR NOT $expected IS NULL)");
+    )
+    ->toBe("(c0 OR NOT $expected IS NULL)");
 
-  expect($where->bindings())
-  ->toBe($bindings);
+    expect($where->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

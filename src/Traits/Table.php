@@ -9,45 +9,40 @@ use Stringable;
 
 trait Table
 {
+    protected array $table = [];
 
-  protected array $table = [];
-
-  public function table(string|Stringable|array $table): static
-  {
-
-    $tables = is_array($table) ? $table : [$table];
-
-    foreach ($tables as $table)
-    {
-      $this->table[] = $table;
-    }
-
-    return $this;
-
-  }
-
-  protected function getTable(): string
-  {
-
-    if (empty($this->table))
-    {
-      return "";
-    }
-
-    $table = implode(", ", $this->table);
-
-    foreach ($this->table as $t)
+    public function table(string|Stringable|array $table): static
     {
 
-      if ($t instanceof HasBindings)
-      {
-        $this->mergeBindings($t);
-      }
+        $tables = is_array($table) ? $table : [$table];
+
+        foreach ($tables as $table) {
+            $this->table[] = $table;
+        }
+
+        return $this;
 
     }
 
-    return $table;
+    protected function getTable(): string
+    {
 
-  }
+        if (empty($this->table)) {
+            return "";
+        }
+
+        $table = implode(", ", $this->table);
+
+        foreach ($this->table as $t) {
+
+            if ($t instanceof HasBindings) {
+                $this->mergeBindings($t);
+            }
+
+        }
+
+        return $table;
+
+    }
 
 }

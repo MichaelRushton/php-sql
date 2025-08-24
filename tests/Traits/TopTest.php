@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("top", function ($row_count, $expected, $bindings = [])
-{
+test("top", function ($row_count, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::TransactSQL))
+    expect(
+        (string) $stmt = (new Select(SQL::TransactSQL))
     ->top($row_count)
-  )
-  ->toBe("SELECT TOP ($expected) *");
+    )
+    ->toBe("SELECT TOP ($expected) *");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

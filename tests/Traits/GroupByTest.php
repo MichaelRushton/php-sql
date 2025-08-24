@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("group by", function ($column, $expected, $bindings = [])
-{
+test("group by", function ($column, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->groupBy($column)
-  )
-  ->toBe("SELECT * GROUP BY $expected");
+    )
+    ->toBe("SELECT * GROUP BY $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -26,14 +25,13 @@ test("group by", function ($column, $expected, $bindings = [])
   [["c1", "c2"], "c1, c2"],
 ]);
 
-test("with rollup", function ()
-{
+test("with rollup", function () {
 
-  expect(
-    (string) (new Select(SQL::SQLite))
+    expect(
+        (string) (new Select(SQL::SQLite))
     ->groupBy("c1")
     ->withRollup()
-  )
-  ->toBe("SELECT * GROUP BY c1 WITH ROLLUP");
+    )
+    ->toBe("SELECT * GROUP BY c1 WITH ROLLUP");
 
 });

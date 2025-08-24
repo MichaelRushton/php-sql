@@ -10,27 +10,24 @@ use Stringable;
 
 class Raw implements HasBindings, Stringable
 {
+    use Bindings;
 
-  use Bindings;
+    public function __construct(
+        public readonly string $expression,
+        string|int|float|bool|null|array $bindings = []
+    ) {
 
-  public function __construct(
-    public readonly string $expression,
-    string|int|float|bool|null|array $bindings = []
-  )
-  {
+        $bindings = is_array($bindings) ? $bindings : [$bindings];
 
-    $bindings = is_array($bindings) ? $bindings : [$bindings];
+        foreach ($bindings as $value) {
+            $this->bindings[] = $value;
+        }
 
-    foreach ($bindings as $value)
-    {
-      $this->bindings[] = $value;
     }
 
-  }
-
-  public function __toString(): string
-  {
-    return $this->expression;
-  }
+    public function __toString(): string
+    {
+        return $this->expression;
+    }
 
 }

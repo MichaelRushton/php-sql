@@ -5,14 +5,13 @@ declare(strict_types=1);
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("into var", function ($var, $expected)
-{
+test("into var", function ($var, $expected) {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->intoVar($var)
-  )
-  ->toBe("SELECT * INTO $expected");
+    )
+    ->toBe("SELECT * INTO $expected");
 
 })
 ->with([

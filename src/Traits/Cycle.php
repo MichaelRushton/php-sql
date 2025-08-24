@@ -6,22 +6,20 @@ namespace MichaelRushton\SQL\Traits;
 
 trait Cycle
 {
+    protected string $cycle = "";
 
-  protected string $cycle = "";
+    public function cycle(
+        string|array $columns,
+        string $set = "is_cycle",
+        string $using = "path"
+    ): static {
 
-  public function cycle(
-    string|array $columns,
-    string $set = "is_cycle",
-    string $using = "path"
-  ): static
-  {
+        $columns = implode(", ", (array) $columns);
 
-    $columns = implode(", ", (array) $columns);
+        $this->cycle = "CYCLE $columns SET $set USING $using";
 
-    $this->cycle = "CYCLE $columns SET $set USING $using";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

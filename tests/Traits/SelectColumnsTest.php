@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("columns", function ($columns, $expected, $bindings = [])
-{
+test("columns", function ($columns, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Select(SQL::SQLite))
     ->columns($columns)
-  )
-  ->toBe("SELECT $expected");
+    )
+    ->toBe("SELECT $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

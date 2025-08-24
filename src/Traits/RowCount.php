@@ -8,6 +8,6 @@ use Stringable;
 
 trait RowCount
 {
-  protected int|string|Stringable $row_count = "";
-  protected int|string|Stringable $offset = "";
+    protected int|string|Stringable $row_count = "";
+    protected int|string|Stringable $offset = "";
 }

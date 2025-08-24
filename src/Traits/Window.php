@@ -10,48 +10,42 @@ use MichaelRushton\SQL\Contracts\Traits\HasBindings;
 
 trait Window
 {
+    protected array $window = [];
 
-  protected array $window = [];
+    public function window(
+        string $name,
+        ?Closure $callback = null,
+    ): static {
 
-  public function window(
-    string $name,
-    ?Closure $callback = null,
-  ): static
-  {
+        $this->window[] = $window = new ComponentsWindow($name);
 
-    $this->window[] = $window = new ComponentsWindow($name);
+        if ($callback) {
+            $callback->call($window, $window);
+        }
 
-    if ($callback)
-    {
-      $callback->call($window, $window);
-    }
-
-    return $this;
-
-  }
-
-  protected function getWindow(): string
-  {
-
-    if (empty($this->window))
-    {
-      return "";
-    }
-
-    $window = implode(", ", $this->window);
-
-    foreach ($this->window as $w)
-    {
-
-      if ($w instanceof HasBindings)
-      {
-        $this->mergeBindings($w);
-      }
+        return $this;
 
     }
 
-    return "WINDOW $window";
+    protected function getWindow(): string
+    {
 
-  }
+        if (empty($this->window)) {
+            return "";
+        }
+
+        $window = implode(", ", $this->window);
+
+        foreach ($this->window as $w) {
+
+            if ($w instanceof HasBindings) {
+                $this->mergeBindings($w);
+            }
+
+        }
+
+        return "WINDOW $window";
+
+    }
 
 }

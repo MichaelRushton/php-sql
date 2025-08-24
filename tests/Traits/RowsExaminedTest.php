@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Select;
 
-test("rows examined", function ($row_count, $expected, $bindings = [])
-{
+test("rows examined", function ($row_count, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Select(SQL::MariaDB))
+    expect(
+        (string) $stmt = (new Select(SQL::MariaDB))
     ->rowsExamined($row_count)
-  )
-  ->toBe("SELECT * LIMIT ROWS EXAMINED $expected");
+    )
+    ->toBe("SELECT * LIMIT ROWS EXAMINED $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -25,14 +24,13 @@ test("rows examined", function ($row_count, $expected, $bindings = [])
   [new Raw("?", 1), "?", [1]],
 ]);
 
-test("rows examined with limit", function ()
-{
+test("rows examined with limit", function () {
 
-  expect(
-    (string) (new Select(SQL::MariaDB))
+    expect(
+        (string) (new Select(SQL::MariaDB))
     ->limit(5)
     ->rowsExamined(10)
-  )
-  ->toBe("SELECT * LIMIT 5 ROWS EXAMINED 10");
+    )
+    ->toBe("SELECT * LIMIT 5 ROWS EXAMINED 10");
 
 });

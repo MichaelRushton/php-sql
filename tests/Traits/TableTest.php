@@ -6,17 +6,16 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Update;
 
-test("table", function ($table, $expected, $bindings = [])
-{
+test("table", function ($table, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Update(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Update(SQL::SQLite))
     ->table($table)
-  )
-  ->toBe("UPDATE $expected");
+    )
+    ->toBe("UPDATE $expected");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([

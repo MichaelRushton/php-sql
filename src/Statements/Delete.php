@@ -25,94 +25,92 @@ use MichaelRushton\SQL\Traits\With;
 
 class Delete extends Statement implements DeleteInterface
 {
+    use From;
+    use Ignore;
+    use Join;
+    use Limit;
+    use LowPriority;
+    use OrderBy;
+    use Output;
+    use Quick;
+    use Returning;
+    use Table;
+    use Top;
+    use Using;
+    use Where;
+    use WhereCurrentOf;
+    use With;
 
-  use From;
-  use Ignore;
-  use Join;
-  use Limit;
-  use LowPriority;
-  use OrderBy;
-  use Output;
-  use Quick;
-  use Returning;
-  use Table;
-  use Top;
-  use Using;
-  use Where;
-  use WhereCurrentOf;
-  use With;
-
-  protected function toArray(): array
-  {
-
-    return match ($this->sql())
+    protected function toArray(): array
     {
 
-      SQL::MariaDB => [
-        "DELETE",
-        $this->low_priority,
-        $this->quick,
-        $this->ignore,
-        $this->getTable(),
-        $this->getFrom(),
-        $this->getUsing(),
-        $this->getJoin(),
-        $this->getWhere(),
-        $this->getOrderBy(),
-        $this->getLimit(),
-        $this->getReturning(),
-      ],
+        return match ($this->sql()) {
 
-      SQL::MySQL => [
-        $this->getWith(),
-        "DELETE",
-        $this->low_priority,
-        $this->quick,
-        $this->ignore,
-        $this->getTable(),
-        $this->getFrom(),
-        $this->getUsing(),
-        $this->getJoin(),
-        $this->getWhere(),
-        $this->getOrderBy(),
-        $this->getLimit(),
-      ],
+            SQL::MariaDB => [
+              "DELETE",
+              $this->low_priority,
+              $this->quick,
+              $this->ignore,
+              $this->getTable(),
+              $this->getFrom(),
+              $this->getUsing(),
+              $this->getJoin(),
+              $this->getWhere(),
+              $this->getOrderBy(),
+              $this->getLimit(),
+              $this->getReturning(),
+            ],
 
-      SQL::PostgreSQL => [
-        $this->getWith(),
-        "DELETE",
-        $this->getFrom(),
-        $this->getUsing(),
-        $this->getJoin(),
-        $this->getWhere(),
-        $this->where_current_of,
-        $this->getReturning(),
-      ],
+            SQL::MySQL => [
+              $this->getWith(),
+              "DELETE",
+              $this->low_priority,
+              $this->quick,
+              $this->ignore,
+              $this->getTable(),
+              $this->getFrom(),
+              $this->getUsing(),
+              $this->getJoin(),
+              $this->getWhere(),
+              $this->getOrderBy(),
+              $this->getLimit(),
+            ],
 
-      SQL::SQLite => [
-        $this->getWith(),
-        "DELETE",
-        $this->getFrom(),
-        $this->getWhere(),
-        $this->getReturning(),
-        $this->getOrderBy(),
-        $this->getLimit(),
-      ],
+            SQL::PostgreSQL => [
+              $this->getWith(),
+              "DELETE",
+              $this->getFrom(),
+              $this->getUsing(),
+              $this->getJoin(),
+              $this->getWhere(),
+              $this->where_current_of,
+              $this->getReturning(),
+            ],
 
-      SQL::TransactSQL => [
-        $this->getWith(),
-        "DELETE",
-        $this->getTop(),
-        $this->getTable(),
-        $this->getOutput(),
-        $this->getFrom(),
-        $this->getJoin(),
-        $this->getWhere(),
-        $this->where_current_of,
-      ],
+            SQL::SQLite => [
+              $this->getWith(),
+              "DELETE",
+              $this->getFrom(),
+              $this->getWhere(),
+              $this->getReturning(),
+              $this->getOrderBy(),
+              $this->getLimit(),
+            ],
 
-    };
+            SQL::TransactSQL => [
+              $this->getWith(),
+              "DELETE",
+              $this->getTop(),
+              $this->getTable(),
+              $this->getOutput(),
+              $this->getFrom(),
+              $this->getJoin(),
+              $this->getWhere(),
+              $this->where_current_of,
+            ],
 
-  }
+        };
+
+    }
 
 }

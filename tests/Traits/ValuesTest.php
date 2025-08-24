@@ -6,14 +6,13 @@ use MichaelRushton\SQL\Components\Raw;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Statements\Insert;
 
-test("empty values", function ($sql, $expected)
-{
+test("empty values", function ($sql, $expected) {
 
-  expect(
-    (string) (new Insert($sql))
+    expect(
+        (string) (new Insert($sql))
     ->values([])
-  )
-  ->toBe("INSERT $expected");
+    )
+    ->toBe("INSERT $expected");
 
 })
 ->with([
@@ -24,17 +23,16 @@ test("empty values", function ($sql, $expected)
   [SQL::TransactSQL, "DEFAULT VALUES"],
 ]);
 
-test("values", function ($values, $expected, $bindings = [])
-{
+test("values", function ($values, $expected, $bindings = []) {
 
-  expect(
-    (string) $stmt = (new Insert(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Insert(SQL::SQLite))
     ->values($values)
-  )
-  ->toBe("INSERT VALUES ($expected)");
+    )
+    ->toBe("INSERT VALUES ($expected)");
 
-  expect($stmt->bindings())
-  ->toBe($bindings);
+    expect($stmt->bindings())
+    ->toBe($bindings);
 
 })
 ->with([
@@ -42,22 +40,21 @@ test("values", function ($values, $expected, $bindings = [])
   [[["test"], [1]], "?), (?", ["test", 1]],
 ]);
 
-test("values with columns", function ()
-{
+test("values with columns", function () {
 
-  expect(
-    (string) $stmt = (new Insert(SQL::SQLite))
+    expect(
+        (string) $stmt = (new Insert(SQL::SQLite))
     ->values([[
-      "c1" => 1,
-      "c2" => 2,
+        "c1" => 1,
+        "c2" => 2,
     ], [
-      "c2" => 4,
-      "c1" => 3,
+        "c2" => 4,
+        "c1" => 3,
     ]])
-  )
-  ->toBe("INSERT (c1, c2) VALUES (?, ?), (?, ?)");
+    )
+    ->toBe("INSERT (c1, c2) VALUES (?, ?), (?, ?)");
 
-  expect($stmt->bindings())
-  ->toBe([1, 2, 3, 4]);
+    expect($stmt->bindings())
+    ->toBe([1, 2, 3, 4]);
 
 });

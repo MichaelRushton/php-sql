@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait StraightJoin
 {
+    protected string $straight_join = "";
 
-  protected string $straight_join = "";
+    public function straightJoinAll(): static
+    {
 
-  public function straightJoinAll(): static
-  {
+        $this->straight_join = "STRAIGHT_JOIN";
 
-    $this->straight_join = "STRAIGHT_JOIN";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 use MichaelRushton\SQL\Components\Subquery;
 
-test("subquery", function ()
-{
+test("subquery", function () {
 
-  expect(
-    (string) (new Subquery("SELECT"))
+    expect(
+        (string) (new Subquery("SELECT"))
     ->all()
     ->any()
     ->exists()
@@ -16,18 +15,18 @@ test("subquery", function ()
     ->lateral()
     ->as("s1")
     ->columns("c1")
-  )
-  ->toBe(
-    implode(" ", [
-      "ALL",
-      "ANY",
-      "EXISTS",
-      "IN",
-      "LATERAL",
-      "(SELECT)",
-      "AS s1",
-      "(c1)",
+    )
+    ->toBe(
+        implode(" ", [
+        "ALL",
+        "ANY",
+        "EXISTS",
+        "IN",
+        "LATERAL",
+        "(SELECT)",
+        "AS s1",
+        "(c1)",
     ])
-  );
+    );
 
 });

@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait LowPriority
 {
+    protected string $low_priority = "";
 
-  protected string $low_priority = "";
+    public function lowPriority(): static
+    {
 
-  public function lowPriority(): static
-  {
+        $this->low_priority = "LOW_PRIORITY";
 
-    $this->low_priority = "LOW_PRIORITY";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

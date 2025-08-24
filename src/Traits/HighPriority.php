@@ -6,16 +6,15 @@ namespace MichaelRushton\SQL\Traits;
 
 trait HighPriority
 {
+    protected string $high_priority = "";
 
-  protected string $high_priority = "";
+    public function highPriority(): static
+    {
 
-  public function highPriority(): static
-  {
+        $this->high_priority = "HIGH_PRIORITY";
 
-    $this->high_priority = "HIGH_PRIORITY";
+        return $this;
 
-    return $this;
-
-  }
+    }
 
 }

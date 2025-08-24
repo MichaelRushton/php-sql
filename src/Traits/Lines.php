@@ -8,45 +8,43 @@ use MichaelRushton\SQL\SQL;
 
 trait Lines
 {
+    protected array $lines = [];
 
-  protected array $lines = [];
-
-  public function linesStartingBy(string $string): static
-  {
-
-    $string = SQL::escape($string);
-
-    $this->lines[0] = "STARTING BY '$string'";
-
-    return $this;
-
-  }
-
-  public function linesTerminatedBy(string $string): static
-  {
-
-    $string = SQL::escape($string);
-
-    $this->lines[1] = "TERMINATED BY '$string'";
-
-    return $this;
-
-  }
-
-  protected function getLines(): string
-  {
-
-    if (empty($this->lines))
+    public function linesStartingBy(string $string): static
     {
-      return "";
+
+        $string = SQL::escape($string);
+
+        $this->lines[0] = "STARTING BY '$string'";
+
+        return $this;
+
     }
 
-    ksort($this->lines);
+    public function linesTerminatedBy(string $string): static
+    {
 
-    $lines = implode(" ", $this->lines);
+        $string = SQL::escape($string);
 
-    return "LINES $lines";
+        $this->lines[1] = "TERMINATED BY '$string'";
 
-  }
+        return $this;
+
+    }
+
+    protected function getLines(): string
+    {
+
+        if (empty($this->lines)) {
+            return "";
+        }
+
+        ksort($this->lines);
+
+        $lines = implode(" ", $this->lines);
+
+        return "LINES $lines";
+
+    }
 
 }
