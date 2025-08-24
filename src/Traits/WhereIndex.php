@@ -7,7 +7,7 @@ namespace MichaelRushton\SQL\Traits;
 use Closure;
 use MichaelRushton\SQL\Components\Predicate;
 use MichaelRushton\SQL\Components\Where;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use Stringable;
 
 trait WhereIndex

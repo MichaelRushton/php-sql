@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace MichaelRushton\SQL;
 
-use MichaelRushton\SQL\Contracts\SQLInterface;
-use MichaelRushton\SQL\Contracts\StatementInterface;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\SQLInterface;
+use MichaelRushton\SQL\Interfaces\StatementInterface;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use MichaelRushton\SQL\Traits\Bindings;
 use MichaelRushton\SQL\Traits\When;
 use Stringable;

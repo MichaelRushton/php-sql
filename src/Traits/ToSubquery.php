@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MichaelRushton\SQL\Traits;
 
 use MichaelRushton\SQL\Components\Subquery;
-use MichaelRushton\SQL\Contracts\Components\SubqueryInterface;
+use MichaelRushton\SQL\Interfaces\Components\SubqueryInterface;
 
 trait ToSubquery
 {

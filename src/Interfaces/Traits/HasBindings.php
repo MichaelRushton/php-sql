@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MichaelRushton\SQL\Contracts\Traits;
+namespace MichaelRushton\SQL\Interfaces\Traits;
 
 interface HasBindings
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace MichaelRushton\SQL\Components;
 
-use MichaelRushton\SQL\Contracts\Components\CTEInterface;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Components\CTEInterface;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use MichaelRushton\SQL\Traits\Bindings;
 use MichaelRushton\SQL\Traits\Columns;
 use MichaelRushton\SQL\Traits\Cycle;

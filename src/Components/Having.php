@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MichaelRushton\SQL\Components;
 
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use MichaelRushton\SQL\Traits\Bindings;
 use MichaelRushton\SQL\Traits\Having as TraitsHaving;
 use Stringable;

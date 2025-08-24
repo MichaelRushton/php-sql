@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MichaelRushton\SQL\Components;
 
-use MichaelRushton\SQL\Contracts\Components\OutfileInterface;
+use MichaelRushton\SQL\Interfaces\Components\OutfileInterface;
 use MichaelRushton\SQL\SQL;
 use MichaelRushton\SQL\Traits\CharacterSet;
 use MichaelRushton\SQL\Traits\Fields;

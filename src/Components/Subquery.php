@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace MichaelRushton\SQL\Components;
 
-use MichaelRushton\SQL\Contracts\Components\SubqueryInterface;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Components\SubqueryInterface;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use MichaelRushton\SQL\Traits\Alias;
 use MichaelRushton\SQL\Traits\All;
 use MichaelRushton\SQL\Traits\Any;

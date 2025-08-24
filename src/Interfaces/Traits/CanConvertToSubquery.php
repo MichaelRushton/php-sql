@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace MichaelRushton\SQL\Contracts\Traits;
+namespace MichaelRushton\SQL\Interfaces\Traits;
 
-use MichaelRushton\SQL\Contracts\Components\SubqueryInterface;
+use MichaelRushton\SQL\Interfaces\Components\SubqueryInterface;
 
 interface CanConvertToSubquery
 {

@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace MichaelRushton\SQL\Components;
 
-use MichaelRushton\SQL\Contracts\Components\TableInterface;
+use MichaelRushton\SQL\Interfaces\Components\TableInterface;
 use MichaelRushton\SQL\Traits\Alias;
 use MichaelRushton\SQL\Traits\ForPortionOf;
 use MichaelRushton\SQL\Traits\IndexHint;

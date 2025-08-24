@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MichaelRushton\SQL\Contracts;
+namespace MichaelRushton\SQL\Interfaces;
 
 use Closure;
 

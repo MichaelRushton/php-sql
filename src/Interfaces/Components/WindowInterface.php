@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace MichaelRushton\SQL\Contracts\Components;
+namespace MichaelRushton\SQL\Interfaces\Components;
 
 use Stringable;
 

@@ -6,7 +6,7 @@ namespace MichaelRushton\SQL\Traits;
 
 use Closure;
 use MichaelRushton\SQL\Components\Window as ComponentsWindow;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 
 trait Window
 {

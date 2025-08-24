@@ -8,7 +8,7 @@ use Closure;
 use MichaelRushton\SQL\Components\Having as ComponentsHaving;
 use MichaelRushton\SQL\Components\Predicate;
 use MichaelRushton\SQL\Components\Raw;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use Stringable;
 
 trait Having

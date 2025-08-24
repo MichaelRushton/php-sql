@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace MichaelRushton\SQL\Components;
 
-use MichaelRushton\SQL\Contracts\Components\UpsertInterface;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Components\UpsertInterface;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use MichaelRushton\SQL\Traits\Bindings;
 use MichaelRushton\SQL\Traits\Columns;
 use MichaelRushton\SQL\Traits\OnConstraint;

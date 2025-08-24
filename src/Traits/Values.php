@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace MichaelRushton\SQL\Traits;
 
 use Exception;
-use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\Interfaces\Traits\HasBindings;
 use MichaelRushton\SQL\SQL;
 
 trait Values

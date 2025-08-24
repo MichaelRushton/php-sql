@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace MichaelRushton\SQL\Contracts\Statements;
+namespace MichaelRushton\SQL\Interfaces\Statements;
 
 use Closure;
-use MichaelRushton\SQL\Contracts\StatementInterface;
+use MichaelRushton\SQL\Interfaces\StatementInterface;
 use Stringable;
 
 interface DeleteInterface extends StatementInterface
