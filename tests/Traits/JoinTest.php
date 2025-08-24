@@ -23,6 +23,7 @@ test("join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a JOIN t2 b"],
 ]);
 
 test("join using", function ($column, $expected) {
@@ -101,6 +102,7 @@ test("left join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 LEFT JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a LEFT JOIN t2 b"],
 ]);
 
 test("left join using", function ($column, $expected) {
@@ -179,6 +181,7 @@ test("right join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 RIGHT JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a RIGHT JOIN t2 b"],
 ]);
 
 test("right join using", function ($column, $expected) {
@@ -257,6 +260,7 @@ test("full join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 FULL JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a FULL JOIN t2 b"],
 ]);
 
 test("full join using", function ($column, $expected) {
@@ -335,6 +339,7 @@ test("straight join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 STRAIGHT_JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a STRAIGHT_JOIN t2 b"],
 ]);
 
 test("straight join using", function ($column, $expected) {
@@ -413,6 +418,7 @@ test("cross join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 CROSS JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a CROSS JOIN t2 b"],
 ]);
 
 test("natural join", function ($table, $expected, $bindings = []) {
@@ -432,6 +438,7 @@ test("natural join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 NATURAL JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a NATURAL JOIN t2 b"],
 ]);
 
 test("natural left join", function ($table, $expected, $bindings = []) {
@@ -451,6 +458,7 @@ test("natural left join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 NATURAL LEFT JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a NATURAL LEFT JOIN t2 b"],
 ]);
 
 test("natural right join", function ($table, $expected, $bindings = []) {
@@ -470,6 +478,7 @@ test("natural right join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 NATURAL RIGHT JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a NATURAL RIGHT JOIN t2 b"],
 ]);
 
 test("natural full join", function ($table, $expected, $bindings = []) {
@@ -489,4 +498,5 @@ test("natural full join", function ($table, $expected, $bindings = []) {
   [new Raw("?", "test"), "?", ["test"]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1 NATURAL FULL JOIN t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a NATURAL FULL JOIN t2 b"],
 ]);

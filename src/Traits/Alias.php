@@ -11,7 +11,7 @@ trait Alias
     public function as(string $alias): static
     {
 
-        $this->alias = "AS $alias";
+        $this->alias = $alias;
 
         return $this;
 

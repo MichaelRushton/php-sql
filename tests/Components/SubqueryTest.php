@@ -24,7 +24,7 @@ test("subquery", function () {
         "IN",
         "LATERAL",
         "(SELECT)",
-        "AS s1",
+        "s1",
         "(c1)",
     ])
     );

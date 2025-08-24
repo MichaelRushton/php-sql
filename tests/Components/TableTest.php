@@ -19,7 +19,7 @@ test("table", function () {
       "t1",
       "PARTITION (p1)",
       "FOR PORTION OF date FROM '2024-01-01' TO '2025-01-01'",
-      "AS t2",
+      "t2",
       "USE INDEX ()",
     ]));
 

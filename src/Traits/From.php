@@ -17,8 +17,8 @@ trait From
 
         $tables = is_array($table) ? $table : [$table];
 
-        foreach ($tables as $table) {
-            $this->from[] = SQL::identifier($table);
+        foreach ($tables as $alias => $table) {
+            $this->from[] = [SQL::identifier($table), is_string($alias) ? " $alias" : ""];
         }
 
         return $this;
@@ -32,15 +32,17 @@ trait From
             return "";
         }
 
-        $from = implode(", ", $this->from);
+        foreach ($this->from as [$table, $alias]) {
 
-        foreach ($this->from as $table) {
+            $from[] = "$table$alias";
 
             if ($table instanceof HasBindings) {
                 $this->mergeBindings($table);
             }
 
         }
+
+        $from = implode(", ", $from);
 
         return "FROM $from";
 

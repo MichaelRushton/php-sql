@@ -29,8 +29,12 @@ trait Join
             $condition = $this->condition($column1, $operator, $column2, $num_args - 1);
         }
 
-        foreach ($tables as $table) {
-            $this->join[] = [$type, SQL::identifier($table), $condition ?? ""];
+        foreach ($tables as $alias => $table) {
+
+            $alias = is_string($alias) ? " $alias" : "";
+
+            $this->join[] = [$type, SQL::identifier($table), $alias, $condition ?? ""];
+
         }
 
         return $this;
@@ -134,9 +138,9 @@ trait Join
             return "";
         }
 
-        foreach ($this->join as [$type, $table, [$prefix, $condition]]) {
+        foreach ($this->join as [$type, $table, $alias, [$prefix, $condition]]) {
 
-            $join[] = trim("$type $table $prefix $condition");
+            $join[] = trim("$type $table$alias $prefix $condition");
 
             foreach ([$table, $condition] as $part) {
 

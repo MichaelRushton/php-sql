@@ -1,7 +1,9 @@
 # PHP-SQL
 
 ## Upsert documentation
+
 `PostgreSQL` and `SQLite` only.
+
 ```php
 use MichaelRushton\SQL\Components\Upsert;
 use MichaelRushton\SQL\SQL;
@@ -16,16 +18,19 @@ $stmt = SQL::PostgreSQL->insert()
 ```
 
 ### columns
+
 ```php
 $upsert->columns("c1");
 // ON CONFLICT (c1) DO ...
 ```
+
 ```php
 $upsert->columns(["c1", "c2"]);
 // ON CONFLICT (c1, c2) DO ...
 ```
 
 ### whereIndex
+
 ```php
 $upsert->columns("c1")
 ->whereIndex("i1");
@@ -33,14 +38,18 @@ $upsert->columns("c1")
 ```
 
 ### onConstraint
+
 `PostgreSQL` only.
+
 ```php
 $upsert->onConstraint("c1");
 // ON CONFLICT ON CONSTRAINT c1
 ```
 
 ### where
+
 See [SELECT documentation](select.md#where).
+
 ```php
 $upsert->where("c1", 1);
 // ON CONFLICT DO ... WHERE c1 = ?

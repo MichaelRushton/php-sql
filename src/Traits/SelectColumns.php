@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace MichaelRushton\SQL\Traits;
 
 use MichaelRushton\SQL\Contracts\Traits\HasBindings;
+use MichaelRushton\SQL\SQL;
 use Stringable;
 
 trait SelectColumns
@@ -16,8 +17,8 @@ trait SelectColumns
 
         $columns = is_array($columns) ? $columns : [$columns];
 
-        foreach ($columns as $column) {
-            $this->columns[] = $column;
+        foreach ($columns as $alias => $column) {
+            $this->columns[] = [SQL::identifier($column), is_string($alias) ? " $alias" : ""];
         }
 
         return $this;
@@ -31,9 +32,9 @@ trait SelectColumns
             return "*";
         }
 
-        $columns = implode(", ", $this->columns);
+        foreach ($this->columns as [$column, $alias]) {
 
-        foreach ($this->columns as $column) {
+            $columns[] = "$column$alias";
 
             if ($column instanceof HasBindings) {
                 $this->mergeBindings($column);
@@ -41,7 +42,7 @@ trait SelectColumns
 
         }
 
-        return $columns;
+        return implode(", ", $columns);
 
     }
 

@@ -23,5 +23,7 @@ test("columns", function ($columns, $expected, $bindings = []) {
   [1, "1"],
   [1.1, "1.1"],
   [new Raw("?", 1), "?", [1]],
+  [new Select(SQL::SQLite), "(SELECT *)"],
   [["c1", "c2"], "c1, c2"],
+  [["a" => "c1", "b" => "c2"], "c1 a, c2 b"],
 ]);

@@ -23,4 +23,5 @@ test("from", function ($table, $expected, $bindings = []) {
   [new Raw("?", 1), "?", [1]],
   [new Select(SQL::SQLite), "(SELECT *)"],
   [["t1", "t2"], "t1, t2"],
+  [["a" => "t1", "b" => "t2"], "t1 a, t2 b"],
 ]);
