@@ -45,7 +45,7 @@ $table->forPortionOf("date_period", "2024-01-01", "2025-01-01");
 
 ```php
 $table->as("t2");
-// t1 AS t2
+// t1 t2
 ```
 
 ### useIndex

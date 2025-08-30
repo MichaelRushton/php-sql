@@ -174,7 +174,7 @@ $stmt->from(
   ->toSubquery()
   ->as("s1")
 );
-// FROM (SELECT * FROM t2) AS s1
+// FROM (SELECT * FROM t2) s1
 ```
 
 ### join

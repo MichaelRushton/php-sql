@@ -57,7 +57,7 @@ $subquery->lateral();
 
 ```php
 $subquery->as("s1");
-// (SELECT ...) AS s1
+// (SELECT ...) s1
 ```
 
 ### columns
