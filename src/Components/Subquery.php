@@ -27,7 +27,7 @@ class Subquery implements SubqueryInterface, HasBindings, Stringable
     use In;
     use Lateral;
 
-    public function __construct(protected string|Stringable $stmt)
+    public function __construct(public readonly string|Stringable $stmt)
     {
     }
 

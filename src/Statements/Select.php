@@ -78,7 +78,7 @@ class Select extends Statement implements SelectInterface, CanConvertToSubquery
     use With;
     use WithTies;
 
-    protected function toArray(): array
+    public function toArray(): array
     {
 
         return match ($this->sql()) {

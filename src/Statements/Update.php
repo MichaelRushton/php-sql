@@ -41,7 +41,7 @@ class Update extends Statement implements UpdateInterface
     use WhereCurrentOf;
     use With;
 
-    protected function toArray(): array
+    public function toArray(): array
     {
 
         return match ($this->sql()) {

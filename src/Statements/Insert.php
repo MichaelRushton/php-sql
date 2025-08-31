@@ -47,7 +47,7 @@ class Insert extends Statement implements InsertInterface
     use Values;
     use With;
 
-    protected function toArray(): array
+    public function toArray(): array
     {
 
         return match ($this->sql()) {

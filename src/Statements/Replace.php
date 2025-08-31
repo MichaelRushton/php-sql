@@ -29,7 +29,7 @@ class Replace extends Statement implements ReplaceInterface
     use Values;
     use With;
 
-    protected function toArray(): array
+    public function toArray(): array
     {
 
         return match ($this->sql()) {

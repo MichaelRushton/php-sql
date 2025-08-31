@@ -26,7 +26,7 @@ abstract class Statement implements StatementInterface, HasBindings, Stringable
         return $this->sql;
     }
 
-    abstract protected function toArray(): array;
+    abstract public function toArray(): array;
 
     public function __toString(): string
     {

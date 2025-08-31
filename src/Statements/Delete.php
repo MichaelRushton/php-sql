@@ -41,7 +41,7 @@ class Delete extends Statement implements DeleteInterface
     use WhereCurrentOf;
     use With;
 
-    protected function toArray(): array
+    public function toArray(): array
     {
 
         return match ($this->sql()) {
